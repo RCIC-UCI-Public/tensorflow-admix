@@ -1,0 +1,28 @@
+---
+- pyversion: "{{ pkg_defaults.python_version }}"
+  pyfamily: "{{ pkg_defaults.python_family }}"
+  pymajor: "{{ pkg_defaults.python_major }}"
+  versions: !include versions.yaml
+
+  extension: tar.gz
+  vendor_source:  "{{ pypiurl }}/{{ name }}-{{ version }}.{{ extension }}"
+  pkgname: "tensorflow-{{ name }}"
+  src_tarball: "{{ name }}-{{ version}}.{{ extension }}"
+  src_dir: "{{ name }}-{{ version }}"
+  root: "{{ pkg_defaults.app_path }}/Python/{{ pyversion }}"
+
+  build:
+    configure: echo No configure required
+    modules: python/{{ pyversion }}
+    pkgmake: python{{ pymajor }} ./setup.py  
+    target: build
+  install:
+    makeinstall: python{{ pymajor }} ./setup.py install --root=$(ROOT) 
+
+  requires:
+    python_{{ pyversion }}
+
+  files: 
+    - "{{ root }}/lib/python{{ pyfamily }}/site-packages/*"
+
+  rpm: !include rpm.extras.yaml

@@ -1,0 +1,8 @@
+!include pymodule.yaml
+---
+- package: google-pasta 
+  name: google-pasta
+  version: "{{ versions.google_pasta }}"
+  pypiurl: https://files.pythonhosted.org/packages/7a/4e/c3e35716d57eba02e49b8ad72a744435df1935f189fbc5f47edafb6d4f00
+  description: |
+    pasta is an AST-based Python refactoring library

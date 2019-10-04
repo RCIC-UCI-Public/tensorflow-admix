@@ -1,0 +1,10 @@
+!include pymodule.yaml
+---
+- package: gast 
+  name: gast
+  version: "{{ versions.gast }}"
+  pypiurl: https://files.pythonhosted.org/packages/1f/04/4e36c33f8eb5c5b6c622a1f4859352a6acca7ab387257d4b3c191d23ec1d
+  description: |
+    A generic AST to represent Python2 and Python3's Abstract Syntax Tree(AST).
+    GAST provides a compatibility layer between the AST of various Python versions, 
+    as produced by ast.parse from the standard ast module.

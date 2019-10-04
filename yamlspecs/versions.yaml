@@ -1,0 +1,13 @@
+---
+wheel: "0.33.6"
+absl_py: "0.8.0"
+astor: "0.8.0"
+backports_weakref: "1.0.post1"
+gast: "0.3.2"
+google_pasta: "0.1.7"
+Keras: "2.3.0"
+opt_einsum: "3.1.0"
+tensorboard: "2.0.0"
+tensorflow_estimator: "2.0.0"
+termcolor: "1.1.0"
+wrapt: "1.11.2"
