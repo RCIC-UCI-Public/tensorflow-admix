@@ -1,0 +1,23 @@
+---
+- package:  Bazel RPM 
+  name: bazel-download 
+  versions: !include versions.yaml
+  version: "{{ versions.bazel }}"
+  pkgname: "{{ name }}"
+  src_tar: 
+  src_dir: .
+  extension:
+  description: >
+    Bazel RPM {{ version }}. 
+  root: "{{ pkg_defaults.app_path }}"
+  build:
+    configure: echo 
+    repos: copr*bazel
+    pkgmake: yumdownloader -y --destdir=.  --enablerepo={{ build.repos }} bazel
+    target: 
+  install:
+     makeinstall: >
+       echo {{ build.pkgmake }} > $(ROOT){{root}}/{{ name }}.sh;
+       /usr/bin/mv *rpm $(REDHAT.ROOT)/RPMS/$(ARCH) 
+  files:
+    -  "{{ root }}/*"

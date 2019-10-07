@@ -1,0 +1,14 @@
+# Modules to build and install locally. Order IS important
+absl-py
+astor
+backports.weakref
+google_pasta
+keras
+opt_einsum
+tensorboard
+tensorflow_estimator
+termcolor
+wrapt
+wheel
+bazel-repo
+bazel-download

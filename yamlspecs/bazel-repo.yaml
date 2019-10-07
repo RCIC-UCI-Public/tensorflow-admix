@@ -1,0 +1,24 @@
+---
+- package:  Bazel Yum Repo
+  name: bazel-repo 
+  versions: !include versions.yaml
+  version: "{{ versions.bazel }}"
+  pkgname: "{{ name }}"
+  repourl: https://copr.fedorainfracloud.org/coprs/vbatts/bazel/repo/epel-7
+  repofile: vbatts-bazel-epel-7.repo
+  src_tarball: 
+  src_dir: .
+  extension:
+  description: >
+    Bazel YUM repo for bazel {{ version }}. 
+  root: "/etc/yum.repos.d"
+  build:
+    configure: echo 
+    pkgmake: wget {{ repourl }}/{{ repofile }}
+    target: 
+  install:
+     makeinstall: >
+       sed -i 's/enabled=1/enabled=0/' {{ repofile }};
+       $(INSTALL) -m 644 {{ repofile }} $(ROOT){{ root }}
+  files:
+    -  "{{ root }}/*"
