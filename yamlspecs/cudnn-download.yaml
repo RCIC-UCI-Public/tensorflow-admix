@@ -1,0 +1,22 @@
+---
+- package:  CudaDNN RPM  libraries
+  name: tensorflow-cudnn-download 
+  versions: !include versions.yaml
+  version: "{{ versions.cudnn }}"
+  pkgname: "{{ name }}"
+  src_tar: 
+  src_dir: .
+  extension:
+  description: >
+    Bazel RPM {{ version }}. 
+  root: "{{ pkg_defaults.app_path }}/etc"
+  build:
+    configure: echo 
+    pkgmake: echo "copy RPMs from google drive"
+    target: 
+  install:
+     makeinstall: >
+       echo {{ build.pkgmake }} > $(ROOT){{ root }}/{{ name }}.sh;
+       /usr/bin/cp  $(REDHAT.ROOT)/sources/libcudnn7*rpm $(REDHAT.ROOT)/RPMS/$(ARCH) 
+  files:
+    -  "{{ root }}/*"

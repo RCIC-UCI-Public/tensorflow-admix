@@ -12,3 +12,4 @@ wrapt
 wheel
 bazel-repo
 bazel-download
+cudnn-download
