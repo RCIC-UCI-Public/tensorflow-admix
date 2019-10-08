@@ -1,6 +1,6 @@
 ---
 - package:  Bazel Yum Repo
-  name: bazel-repo 
+  name: tensorflow-bazel-repo 
   versions: !include versions.yaml
   version: "{{ versions.bazel }}"
   pkgname: "{{ name }}"

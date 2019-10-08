@@ -1,6 +1,6 @@
 ---
 - package:  Bazel RPM 
-  name: bazel-download 
+  name: tensorflow-bazel-download 
   versions: !include versions.yaml
   version: "{{ versions.bazel }}"
   pkgname: "{{ name }}"
@@ -9,7 +9,7 @@
   extension:
   description: >
     Bazel RPM {{ version }}. 
-  root: "{{ pkg_defaults.app_path }}"
+  root: "{{ pkg_defaults.app_path }}/etc"
   build:
     configure: echo 
     repos: copr*bazel
@@ -17,7 +17,7 @@
     target: 
   install:
      makeinstall: >
-       echo {{ build.pkgmake }} > $(ROOT){{root}}/{{ name }}.sh;
+       echo {{ build.pkgmake }} > $(ROOT){{ root }}/{{ name }}.sh;
        /usr/bin/mv *rpm $(REDHAT.ROOT)/RPMS/$(ARCH) 
   files:
     -  "{{ root }}/*"
