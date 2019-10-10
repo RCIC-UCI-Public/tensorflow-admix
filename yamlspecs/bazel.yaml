@@ -1,0 +1,33 @@
+---
+- package: bazel 
+  name: tensorflow-bazel 
+  pkgname: "{{ name }}"
+  versions: !include versions.yaml
+  version: "{{ versions.bazel }}"
+  suffix: dist
+  extension: zip
+  src_tarball: "{{ package }}-{{ version }}-{{ suffix }}.{{ extension }}"
+  vendor_source: https://github.com/bazelbuild/bazel/releases/download/0.26.1/{{ src_tarball }}
+  description: |
+    Bazel build and test tool
+  no_src_dir: True
+  root: "{{ pkg_defaults.app_path }}"
+  bdir: compile-bazel
+  build:
+    configure: echo configure not used 
+    pkgmake: mkdir {{ bdir }}; cd {{ bdir }}; unzip $(REDHAT.ROOT)/sources/{{ src_tarball }}; env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
+    modules:  
+    target:  
+  install:
+    makeinstall: >
+      mkdir -p $(ROOT)/{{ root }}/bin;
+      mkdir -p $(ROOT)/{{ root }}/etc;
+      echo '{{ build.pkgmake }}' > $(ROOT){{ root }}/etc/{{ name }}.sh;
+      $(INSTALL) -m755 {{ bdir }}/output/bazel $(ROOT){{root}}/bin/
+  files:
+    - "{{ root }}/bin/*"
+    - "{{ root }}/etc/*"
+
+  rpm:
+    extras: >
+      %define __spec_install_post %{nil}
