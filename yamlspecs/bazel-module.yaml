@@ -1,0 +1,18 @@
+# Builds the module for bazel. It first includes all the definitions
+# for the boost build and then overwrites specific keys
+!include bazel.yaml
+!include /opt/rcic/include/rcic-module.yaml
+---
+- package: bazel module 
+  pkgname: "{{ name }}_{{version}}-module"
+  no_src_dir: True
+  src_tarball: None
+  category: tools
+  module:
+    name: "{{ version }}"
+    path: "{{ pkg_defaults.module.path }}/{{name}}"
+    prepend_path:
+      - "{{ pkg_defaults.module.prepend_path }}"
+  requires:
+    - "{{ name }}"
+    - rcic-module-support
