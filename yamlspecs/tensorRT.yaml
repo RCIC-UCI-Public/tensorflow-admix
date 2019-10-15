@@ -1,0 +1,32 @@
+---
+- package: TensorRT
+  basename: tensorrt
+  name: tensorflow-tensorRT 
+  pkgname: "{{ name }}"
+  versions: !include versions.yaml
+  version: "{{ versions.tensorRT }}"
+  extension: tar.gz
+  suffix: CentOS-7.6.x86_64-gnu.cuda-10.1.cudnn7.6
+  nvidiaurl: https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/6.0/GA_{{version}}/tars
+  src_tarball: "{{ package }}-{{ version }}.{{ suffix }}.{{ extension }}"
+  vendor_source: "{{nvidiaurl}}/{{name}}"
+  description: |
+    TensorRT provides API's via C++ and Python that help to express deep learning 
+    models via the Network Definition API or load a pre-defined model via the parsers 
+    that allows TensorRT to optimize and run them on an NVIDIA GPU.
+  src_dir: "{{package}}-{{version}}"
+  root: "{{ pkg_defaults.app_path }}/{{ basename }}/{{ version }}"
+  contents: bin  doc  include  lib  samples 
+  pycontents: graphsurgeon  python  uff
+
+  build:
+    configure: echo configure not used 
+    pkgmake: 
+    modules:  
+    target:  
+  install:
+    makeinstall: >
+      for x in {{ contents }}; do cp -pR $$x/ $(ROOT){{ root }}; done
+  files:
+    - "{{ root }}/*"
+  rpm: !include rpm.extras.yaml
