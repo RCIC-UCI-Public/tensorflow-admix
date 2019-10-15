@@ -1,5 +1,5 @@
 ---
-- package:  CudaDNN RPM  libraries
+- package:  cuDNN RPM  libraries
   name: tensorflow-cudnn-download 
   versions: !include versions.yaml
   version: "{{ versions.cudnn }}"
@@ -8,7 +8,7 @@
   src_dir: .
   extension:
   description: >
-    Bazel RPM {{ version }}. 
+    NVIDIA cuDNN libraries {{ version }} RPMs. 
   root: "{{ pkg_defaults.app_path }}/etc"
   build:
     configure: echo 
