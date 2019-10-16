@@ -1,21 +1,20 @@
 ---
 - package: computecpp
-  name: tensorflow-computecpp
-  dname: ComputeCpp-CE
+  name: computecpp
+  distname: ComputeCpp-CE
   suffix: CentOS-x86_64
   versions: !include versions.yaml
   version: "{{ versions.computecpp }}"
   extension: tar.gz
   vendor_source: 
-  pkgname: "{{ name }}"
+  pkgname: "{{ name }}_{{version}}"
 
   src_tarball: "{{ src_dir }}.{{ extension }}"
-  src_dir: "{{ dname }}-{{ version }}-{{ suffix }}"
+  src_dir: "{{ distname }}-{{ version }}-{{ suffix }}"
   description: |
     Accelerate Complex C++ Applications on Heterogeneous Compute Systems using Open Standards version {{ version }}.
   
-  
-  root: "{{ pkg_defaults.app_path }}/computecpp"
+  root: "{{ pkg_defaults.app_path }}/{{name}}/{{version}}"
   build:
     configure: echo 
     modules: 
