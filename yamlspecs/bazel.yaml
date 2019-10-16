@@ -1,17 +1,17 @@
 ---
 - package: bazel 
-  name: tensorflow-bazel 
-  pkgname: "{{ name }}"
+  name: bazel 
+  pkgname: "{{ name }}_{{version}}"
   versions: !include versions.yaml
   version: "{{ versions.bazel }}"
   suffix: dist
   extension: zip
   src_tarball: "{{ package }}-{{ version }}-{{ suffix }}.{{ extension }}"
-  vendor_source: https://github.com/bazelbuild/bazel/releases/download/0.26.1/{{ src_tarball }}
+  vendor_source: https://github.com/bazelbuild/bazel/releases/download/{{version}}/{{ src_tarball }}
   description: |
     Bazel build and test tool
   no_src_dir: True
-  root: "{{ pkg_defaults.app_path }}"
+  root: "{{ pkg_defaults.app_path }}/{{name}}/{{version}}"
   bdir: compile-bazel
   build:
     configure: echo configure not used 
@@ -25,8 +25,7 @@
       echo '{{ build.pkgmake }}' > $(ROOT){{ root }}/etc/{{ name }}.sh;
       $(INSTALL) -m755 {{ bdir }}/output/bazel $(ROOT){{root}}/bin/
   files:
-    - "{{ root }}/bin/*"
-    - "{{ root }}/etc/*"
+    - "{{ root }}"
 
   rpm:
     extras: >

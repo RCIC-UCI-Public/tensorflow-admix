@@ -12,7 +12,7 @@
     name: "{{ version }}"
     path: "{{ pkg_defaults.module.path }}/{{name}}"
     prepend_path:
-      - "{{ pkg_defaults.module.prepend_path }}"
+      - PATH {{ root }}/bin
   requires:
-    - "{{ name }}"
+    - "{{ name }}_{{version}}"
     - rcic-module-support
