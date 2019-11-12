@@ -1,0 +1,37 @@
+---
+bootstrap:
+  - cudnn-download
+build:
+  - absl-py
+  - astor
+  - backports-weakref
+  - gast
+  - google-pasta
+  - keras_applications
+  - keras_preprocessing
+  - h5py
+  - keras
+  - opt_einsum
+  - grpcio
+  - markdown
+  - protobuf
+  - werkzeug
+  - tensorboard
+  - tensorflow_estimator
+  - termcolor
+  - wrapt
+  - wheel
+  - tensorRT
+  - tensorRT-module
+  - bazel
+  - bazel-module
+  - computecpp
+  - computecpp-module
+system:
+  - yum-utils
+  - java-11-openjdk-devel
+manifest:
+  - "{{ build }}"
+  - libcudnn7-7.6.4.38-1.cuda10.1
+  - libcudnn7-devel-7.6.4.38-1.cuda10.1
+  - libcudnn7-doc-7.6.4.38-1.cuda10.1
