@@ -15,7 +15,7 @@
   bdir: compile-bazel
   build:
     configure: echo configure not used 
-    pkgmake: mkdir {{ bdir }}; cd {{ bdir }}; unzip $(REDHAT.ROOT)/sources/{{ src_tarball }}; env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
+    pkgmake: mkdir {{bdir}}; cd {{bdir}}; unzip $(REDHAT.ROOT)/sources/{{ src_tarball }}; env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
     modules:  
     target:  
   install:
@@ -26,7 +26,6 @@
       $(INSTALL) -m755 {{ bdir }}/output/bazel $(ROOT){{root}}/bin/
   files:
     - "{{ root }}"
-
   rpm:
     extras: >
       %define __spec_install_post %{nil}

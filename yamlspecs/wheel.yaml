@@ -9,7 +9,7 @@
      It has two different roles.
        1. A setuptools extension for building wheels that provides the bdist_wheel setuptools command
        2. A command line tool for working with wheel files
-     Wheel is not intended to be used as a library, and as such there is no stable, public API.
+     Wheel is not intended to be used as a library, and as such there is no stable, public API
   files: 
     - "{{ root }}/bin/*"
     - "{{ root }}/lib/python{{ pyfamily }}/site-packages/*"

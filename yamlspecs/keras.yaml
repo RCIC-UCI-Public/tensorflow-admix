@@ -1,13 +1,13 @@
 !include pymodule.yaml
 ---
-- package: Keras 
+- package: keras 
   name: Keras
-  version: "{{ versions.Keras }}"
+  version: "{{ versions.keras }}"
   pypiurl: https://files.pythonhosted.org/packages/24/f1/7b851387dd9587208d40786be2c9270d557ed76cd39b2aa9b93e86c8a746
   description: |
     Deep learning for humans
     Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow, CNTK, or Theano.
     Use Keras if you need a deep learning library that 
-      - Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility).
-      - Supports both convolutional networks and recurrent networks, as well as combinations of the two.
-      - Runs seamlessly on CPU and GPU.
+      - Allows for easy and fast prototyping (through user friendliness, modularity, and extensibility)
+      - Supports both convolutional networks and recurrent networks, as well as combinations of the two
+      - Runs seamlessly on CPU and GPU

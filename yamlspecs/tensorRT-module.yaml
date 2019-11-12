@@ -1,16 +1,11 @@
-# Builds the module for tensorRT. It first includes all the definitions
-# for the boost build and then overwrites specific keys
+# Builds the module for tensorRT.
 !include tensorRT.yaml
 !include /opt/rcic/include/rcic-module.yaml
 ---
 - package: tensorRT module 
-  pkgname: "{{ name }}_{{version}}-module"
-  no_src_dir: True
-  src_tarball: None
-  category: deep learning
+  pkgname: "{{ name }}_{{version}}_python{{pyversion}}-module"
+  category: AI
   module:
-    name: "{{ version }}"
-    path: "{{ pkg_defaults.module.path }}/{{name}}"
     prepend_path:
       - PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/bin"
       - LD_LIBRARY_PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/lib"
@@ -19,5 +14,5 @@
       - python/{{ pyversion }}
       - cuda
   requires:
-    - "{{ name }}_{{ version }}"
+    - "{{ name }}_{{ version }}_python{{pyversion}}"
     - rcic-module-support

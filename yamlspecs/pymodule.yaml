@@ -1,15 +1,15 @@
 ---
-- pyversion: "{{ pkg_defaults.python_version }}"
-  pyfamily: "{{ pkg_defaults.python_family }}"
-  pymajor: "{{ pkg_defaults.python_major }}"
-  versions: !include versions.yaml
+- versions: !include versions.yaml
+  pyversion: "{{ versions.python_version }}"
+  pyfamily: "{{ versions.python_family }}"
+  pymajor: "{{ versions.python_major }}"
 
   extension: tar.gz
   vendor_source:  "{{ pypiurl }}/{{ name }}-{{ version }}.{{ extension }}"
-  pkgname: "tensorflow-{{ name }}"
+  pkgname: "tensorflow-python{{pyversion}}-{{ name }}_{{version}}"
   src_tarball: "{{ name }}-{{ version}}.{{ extension }}"
   src_dir: "{{ name }}-{{ version }}"
-  root: "{{ pkg_defaults.app_path }}/Python/{{ pyversion }}"
+  root: "{{ pkg_defaults.app_path }}/python/{{ pyversion }}"
 
   build:
     configure: echo No configure required

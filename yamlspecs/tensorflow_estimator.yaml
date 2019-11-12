@@ -9,11 +9,10 @@
   pypiurl: https://files.pythonhosted.org/packages/95/00/5e6cdf86190a70d7382d320b2b04e4ff0f8191a37d90a422a2f8ff0705bb
   vendor_source:  "{{ pypiurl }}/{{ src_tarball }}"
   description: |
-    TensorFlow Estimator is a high-level API that encapsulates model training, evaluation, prediction, and exporting.
-
-  instpath: "{{ pkg_defaults.app_path }}/Python/{{ pyversion }}/lib/python{{ pyfamily }}/site-packages"
-  build: 
-    modules: python/{{ pyversion }}
+    TensorFlow Estimator is a high-level API that encapsulates model training, evaluation, prediction, and exporting
+  instpath: "{{ pkg_defaults.app_path }}/python/{{ pyversion }}/lib/python{{ pyfamily }}/site-packages"
+#  build: 
+#    modules: python/{{ pyversion }}
   install:
     makeinstall: >
       mkdir -p $(ROOT)/{{ instpath }};

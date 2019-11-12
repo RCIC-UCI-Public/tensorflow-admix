@@ -1,12 +1,11 @@
-# Builds the module for tensorflow. It first includes all the definitions
-# for the tensorflow build and then overwrites specific keys
+# Builds the module for tensorflow
 !include tensorflow.yaml
 !include /opt/rcic/include/rcic-module.yaml
 ---
 - package: "{{ name }} module"
-  pkgname: "{{ name }}_{{version}}-module"
-  no_src_dir: True
-  category: file formats
+#  pkgname: "{{ name }}_{{version}}-module"
+#  no_src_dir: True
+#  category: file formats
   description: |
      {{ base_description }}
      Environment var: UDUNITS_HOME = {{ root }}

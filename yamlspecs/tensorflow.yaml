@@ -13,20 +13,16 @@
   pypiurl: https://files.pythonhosted.org/packages/46/0f/7bd55361168bb32796b360ad15a25de6966c9c1beb58a8e30c01c8279862
   vendor_source:  "{{ pypiurl }}/{{ src_tarball }}"
   description: |
-    TensorFlow is an open source software library for high performance numerical computation. 
-
-  root: "{{ pkg_defaults.app_path }}/Python/{{ pyversion }}/lib/python{{ pyfamily }}/site-packages"
-
-  build: 
-    modules: python/{{ pyversion }}
+    TensorFlow is an open source software library for high performance numerical computation
+  root: "{{ pkg_defaults.app_path }}/python/{{ pyversion }}/lib/python{{ pyfamily }}/site-packages"
+#  build: 
+#    modules: python/{{ pyversion }}
   install:
     makeinstall: >
       mkdir -p $(ROOT)/{{ root }};
       unzip -d $(ROOT)/{{ root }} {{ src_tarball }};
       (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{ name }}*)
-
   files: 
     - "{{ root }}/*"
-
 # wget https://files.pythonhosted.org/packages/46/0f/7bd55361168bb32796b360ad15a25de6966c9c1beb58a8e30c01c8279862/tensorflow-2.0.0-cp36-cp36m-manylinux2010_x86_64.whl
 # wget https://files.pythonhosted.org/packages/25/44/47f0722aea081697143fbcf5d2aa60d1aee4aaacb5869aee2b568974777b/tensorflow_gpu-2.0.0-cp36-cp36m-manylinux2010_x86_64.whl

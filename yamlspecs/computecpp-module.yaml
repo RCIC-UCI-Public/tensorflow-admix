@@ -1,21 +1,13 @@
-# Builds the module for computecpp. It first includes all the definitions
-# for the boost build and then overwrites specific keys
+# Builds the module for computecpp.
 !include computecpp.yaml
 !include /opt/rcic/include/rcic-module.yaml
 ---
 - package: computecpp module 
   pkgname: "{{ name }}_{{version}}-module"
-  no_src_dir: True
-  src_tarball: None
-  category: tools
+  category: TOOLS
   module:
-    name: "{{ version }}"
-    path: "{{ pkg_defaults.module.path }}/{{name}}"
     prepend_path:
       - PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/bin"
       - LD_LIBRARY_PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/lib"
       - LDFLAGS "-L{{root}}/lib"
       - CPPFLAGS "-I{{root}}/include"
-  requires:
-    - "{{ name }}_{{ version }}"
-    - rcic-module-support

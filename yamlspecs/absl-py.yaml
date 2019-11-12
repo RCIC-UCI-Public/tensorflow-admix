@@ -6,6 +6,7 @@
   pypiurl: https://files.pythonhosted.org/packages/3c/0d/7cbf64cac3f93617a2b6b079c0182e4a83a3e7a8964d3b0cc3d9758ba002
   description: |
     Abseil Python Common Libraries, a collection of Python library code for building Python applications. This
-    code is collected from Google's own Python code base, and has been extensively tested and used in production.
-  files: 
-    - "{{ root }}/lib/python{{ pyfamily }}/site-packages/*"
+    code is collected from Google's own Python code base, and has been extensively tested and used in production
+#  files: 
+#    - "{{ root }}/lib/python{{ pyfamily }}/site-packages/*"
+
