@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# track of built steps. 
+# will need to be run via Makefile as a separate
+# target or directly via shell script. Takes too long ~14hrs
+# to compile build_pip_package
+
+# Checkout tensorflow from git and switch to last branch
+git clone https://github.com/tensorflow/tensorflow
+cd tensorflow
+git describe --tags
+git checkout r2.0
+git branch
+ 
+# Load needed modules
+# first 4 - for main build
+# foundation for git that understands -C flag
+module load bazel/0.26.1 
+module load cuda/10.1.243_418.87.00 
+module load computecpp/1.1.4 
+module load tensorRT/6.0.1.5 
+module load foundation
+
+### these are executed in tensorflow/ (git repo)
+# configure the build.Rub configure ocmmand abnd anwer the questions.
+# the result is .tf_configure.bazelrc in the current directory
+# Note .bazelrc is included in the distro
+./configure
+
+# bazel build takes forever, On a VM with 2 cores and 8Gb memory ~14hrs
+nohup bazel build --local_ram_resources=4096 //tensorflow/tools/pip_package:build_pip_package >  ../build-out &
+
+#file bazel-bin/tensorflow/tools/pip_package/build_pip_package
+#tensorflow/bazel-bin/tensorflow/tools/pip_package/build_pip_package: symbolic link to /export/repositories/tensorflow-admix/yamlspecs/tensorflow/tensorflow/tools/pip_package/build_pip_package.sh
+#ll tensorflow/tools/pip_package/build_pip_package.sh
+#-rwxr-xr-x 1 root root 10545 Oct  7 18:48 tensorflow/tools/pip_package/build_pip_package.sh
+
+# build whl file
+./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow.pkg
+
+#  copy resulting wheel to sources
+cp /tmp/tensorflow.pkg/tensorflow-2.0.0-cp36-cp36m-linux_x86_64.whl  ../sources/
+
+# Use yaml file to create RPM
+# Edit yaml to use above created whl file
+make tensorflow.pkg
