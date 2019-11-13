@@ -4,7 +4,7 @@
 ---
 - package: tensorRT module 
   pkgname: "{{ name }}_{{version}}_python{{pyversion}}-module"
-  category: AI
+  category: AI-LEARNING
   module:
     prepend_path:
       - PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/bin"
