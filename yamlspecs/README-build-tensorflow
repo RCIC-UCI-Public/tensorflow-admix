@@ -145,19 +145,37 @@ nohup bazel build --local_ram_resources=4096 --verbose_failures //tensorflow/too
 # it before running bazel again:
 patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
 
-
-
+# AFter bazel buid finisheds have build_pip_package:
 #file bazel-bin/tensorflow/tools/pip_package/build_pip_package
 #tensorflow/bazel-bin/tensorflow/tools/pip_package/build_pip_package: symbolic link to /export/repositories/tensorflow-admix/yamlspecs/tensorflow/tensorflow/tools/pip_package/build_pip_package.sh
 #ll tensorflow/tools/pip_package/build_pip_package.sh
 #-rwxr-xr-x 1 root root 10545 Oct  7 18:48 tensorflow/tools/pip_package/build_pip_package.sh
 
-# build whl file
+# Build whl file
 ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow.pkg
+Thu Nov 14 10:43:03 PST 2019 : === Preparing sources in dir: /tmp/tmp.arT87OztXt
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0 /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0
+/tmp/tmp.arT87OztXt/tensorflow/include /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0
+Thu Nov 14 10:43:13 PST 2019 : === Building wheel
+warning: no files found matching 'README'
+warning: no files found matching '*.pyd' under directory '*'
+warning: no files found matching '*.pd' under directory '*'
+warning: no files found matching '*.dylib' under directory '*'
+warning: no files found matching '*.dll' under directory '*'
+warning: no files found matching '*.lib' under directory '*'
+warning: no files found matching '*.csv' under directory '*'
+warning: no files found matching '*.h' under directory 'tensorflow_core/include/tensorflow'
+warning: no files found matching '*' under directory 'tensorflow_core/include/third_party'
+Thu Nov 14 10:43:52 PST 2019 : === Output wheel file is in: /tmp/tensorflow_pkg
+
+ls /tmp/tensorflow_pkg/
+tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl
 
 #  copy resulting wheel to sources
-cp /tmp/tensorflow.pkg/tensorflow-2.0.0-cp36-cp36m-linux_x86_64.whl  ../sources/
+cp /tmp/tensorflow.pkg/tensorflow-2.0.0-*linux_x86_64.whl  ../../sources/
 
-# Use yaml file to create RPM
+# In tensorflow-admix/yamspecs/ use yaml file to create RPM
 # Edit yaml to use above created whl file
 make tensorflow.pkg
