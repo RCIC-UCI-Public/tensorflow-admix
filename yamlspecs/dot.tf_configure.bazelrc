@@ -15,7 +15,7 @@ build --action_env LD_LIBRARY_PATH="/opt/apps/tensorRT/6.0.1.5/lib:/opt/apps/pyt
 build --action_env GCC_HOST_COMPILER_PATH="/usr/bin/gcc"
 build --config=cuda
 build:opt --copt=-Wno-sign-compare
-build:opt --host_copt=-march=native
+build:opt --host_copt=-march=core-avx2
 build:opt --define with_default_optimizations=true
 test --flaky_test_attempts=3
 test --test_size_filters=small,medium
