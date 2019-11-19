@@ -9,10 +9,9 @@
     prepend_path:
       - PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/bin"
       - LD_LIBRARY_PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/lib"
-      - PYTHONPATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/lib/python{{ pyfamily }}/site-packages"
     prereq: 
       - python/{{ pyversion }}
-      - cuda
+      - cuda/{{cudaversion}}
   requires:
     - "{{ name }}_{{ version }}_python{{pyversion}}"
     - rcic-module-support
