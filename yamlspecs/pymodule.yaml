@@ -3,6 +3,7 @@
   pyversion: "{{ versions.python_version }}"
   pyfamily: "{{ versions.python_family }}"
   pymajor: "{{ versions.python_major }}"
+  cudaversion: "{{ versions.cuda}}"
 
   extension: tar.gz
   vendor_source:  "{{ pypiurl }}/{{ name }}-{{ version }}.{{ extension }}"
