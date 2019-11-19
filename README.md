@@ -96,7 +96,7 @@ The Tensorflwo v.2.0.0 had a few bugs that require fixes.
    from:
    nullptr, /* tp_print */ 
    to:
-   0, /* tp_print */ 
+   NULL, /* tp_print */ 
    ```
    Create a patch for files:
    - tensorflow/python/eager/pywrap_tensor.cc 
