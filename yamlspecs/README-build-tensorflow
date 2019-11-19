@@ -21,8 +21,8 @@ cd tensorflow-2.0.0/
 # first 4 - for main build
 # foundation for git that understands -C flag
 module load bazel/0.26.1 
-module load cuda/10.1.243_418.87.00 
-module load computecpp/1.1.4 
+module load cuda/10.1.243
+module load computecpp/1.1.6 
 module load tensorRT/6.0.1.5 
 module load foundation
 
