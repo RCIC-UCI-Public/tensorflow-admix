@@ -33,7 +33,9 @@ Build/install all the prerequisites.
 
    The packages and theri specific versions are listed in packages.yaml and versions.yaml
 
-   Note: gast 0.3+ no longer has `Num`, which is required by tensroflow. Use older verison 0.2.2
+   Note: gast 0.3+ no longer has attribute `Num`, which is required by tensroflow. The built
+   tensorflow package when imported fails with `AttributeError: module 'gast' has no attribute 'Num'`
+   Use older gast verison 0.2.2. 
 
 1. Install bazel from source. See https://docs.bazel.build/versions/master/install.html for details.
    Make sure to use a supported bazel version: any version between _TF_MIN_BAZEL_VERSION and 
@@ -70,6 +72,36 @@ Build/install all the prerequisites.
    https://developer.codeplay.com/products/computecpp/ce/guides/tensorflow-guide/tensorflow-generic-setup
 
    NOTE: installed ComputeCPP but NOT USING with tensorflow build
+
+## Patch tensorflow source.
+
+The Tensorflwo v.2.0.0 had a few bugs that require fixes.
+
+1. Bazel build fails with `cannot convert ‘std::nullptr_t’ to ‘Py_ssize_t {aka long int}’ in initialization`
+   See https://github.com/tensorflow/tensorflow/issues/33543.
+   In Python 3.8, the reserved `tp_print` slot was changed from a function pointer to a number, 
+   `Py_ssize_t tp_vectorcall_offset`. Search for `tp_print` in the source files and change nullptr to 0 (or NULL):
+   ```txt
+   from:
+   nullptr, /* tp_print */ 
+   to:
+   0, /* tp_print */ 
+   ```
+   Create a patch for files:
+   - tensorflow/python/eager/pywrap_tensor.cc 
+   - tensorflow/python/eager/pywrap_tfe_src.cc
+   - tensorflow/python/lib/core/bfloat16.cc
+   - tensorflow/python/lib/core/ndarray_tensor_bridge.cc
+
+1. TensorFlow on Python 3.8 logger issue #33953
+   See https://github.com/tensorflow/tensorflow/pull/33953/commits/ea3063c929c69f738bf65bc99dad1159803e772f
+   Create a patch for file:
+   - tensorflow.orig/python/platform/tf_logging.py
+
+Create a single patch file for all 5 patches and apply whil in top extraceted source dir:
+```bash
+patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
+```
 
 ## Configure the build
 

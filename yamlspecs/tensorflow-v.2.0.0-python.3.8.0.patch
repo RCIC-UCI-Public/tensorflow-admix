@@ -1,0 +1,79 @@
+diff -Naur tensorflow.orig/python/eager/pywrap_tensor.cc tensorflow/python/eager/pywrap_tensor.cc
+--- tensorflow.orig/python/eager/pywrap_tensor.cc	2019-11-13 17:21:28.496000000 -0800
++++ tensorflow/python/eager/pywrap_tensor.cc	2019-11-18 13:09:17.078000000 -0800
+@@ -839,7 +839,7 @@
+     sizeof(EagerTensor),                /* tp_basicsize */
+     0,                                  /* tp_itemsize */
+     (destructor)EagerTensor_dealloc,    /* tp_dealloc */
+-    nullptr,                            /* tp_print */
++    NULL,                               /* tp_print */
+     nullptr,                            /* tp_getattr */
+     nullptr,                            /* tp_setattr */
+     nullptr,                            /* tp_compare */
+diff -Naur tensorflow.orig/python/eager/pywrap_tfe_src.cc tensorflow/python/eager/pywrap_tfe_src.cc
+--- tensorflow.orig/python/eager/pywrap_tfe_src.cc	2019-11-13 17:21:36.411000000 -0800
++++ tensorflow/python/eager/pywrap_tfe_src.cc	2019-11-18 13:09:39.753000000 -0800
+@@ -1319,7 +1319,7 @@
+     sizeof(TFE_Py_Tape),                          /* tp_basicsize */
+     0,                                            /* tp_itemsize */
+     &TFE_Py_Tape_Delete,                          /* tp_dealloc */
+-    nullptr,                                      /* tp_print */
++    NULL,                                         /* tp_print */
+     nullptr,                                      /* tp_getattr */
+     nullptr,                                      /* tp_setattr */
+     nullptr,                                      /* tp_reserved */
+@@ -1353,7 +1353,7 @@
+     sizeof(TFE_Py_ForwardAccumulator),                      /* tp_basicsize */
+     0,                                                      /* tp_itemsize */
+     &TFE_Py_ForwardAccumulatorDelete,                       /* tp_dealloc */
+-    nullptr,                                                /* tp_print */
++    NULL,                                                   /* tp_print */
+     nullptr,                                                /* tp_getattr */
+     nullptr,                                                /* tp_setattr */
+     nullptr,                                                /* tp_reserved */
+diff -Naur tensorflow.orig/python/lib/core/bfloat16.cc tensorflow/python/lib/core/bfloat16.cc
+--- tensorflow.orig/python/lib/core/bfloat16.cc	2019-11-13 17:21:52.210000000 -0800
++++ tensorflow/python/lib/core/bfloat16.cc	2019-11-18 13:10:11.197000000 -0800
+@@ -317,7 +317,7 @@
+     sizeof(PyBfloat16),                        // tp_basicsize
+     0,                                         // tp_itemsize
+     nullptr,                                   // tp_dealloc
+-    nullptr,                                   // tp_print
++    NULL,                                      // tp_print
+     nullptr,                                   // tp_getattr
+     nullptr,                                   // tp_setattr
+     nullptr,                                   // tp_compare / tp_reserved
+diff -Naur tensorflow.orig/python/lib/core/ndarray_tensor_bridge.cc tensorflow/python/lib/core/ndarray_tensor_bridge.cc
+--- tensorflow.orig/python/lib/core/ndarray_tensor_bridge.cc	2019-11-13 17:21:44.450000000 -0800
++++ tensorflow/python/lib/core/ndarray_tensor_bridge.cc	2019-11-18 13:10:18.847000000 -0800
+@@ -86,7 +86,7 @@
+     0,                                /* tp_itemsize */
+     /* methods */
+     TensorReleaser_dealloc,      /* tp_dealloc */
+-    nullptr,                     /* tp_print */
++    NULL,                        /* tp_print */
+     nullptr,                     /* tp_getattr */
+     nullptr,                     /* tp_setattr */
+     nullptr,                     /* tp_compare */
+diff -Naur tensorflow.orig/python/platform/tf_logging.py tensorflow/python/platform/tf_logging.py
+--- tensorflow.orig/python/platform/tf_logging.py	2019-11-14 14:04:11.638000000 -0800
++++ tensorflow/python/platform/tf_logging.py	2019-11-14 14:05:44.302000000 -0800
+@@ -59,7 +59,17 @@
+ 
+ 
+ # The definition of `findCaller` changed in Python 3.2
+-if _sys.version_info.major >= 3 and _sys.version_info.minor >= 2:
++if _sys.version_info.major >= 3 and _sys.version_info.minor >= 8:
++   def _logger_find_caller(stack_info=False, stacklevel=1):  # pylint: disable=g-wrong-blank-lines
++     code, frame = _get_caller(4)
++     sinfo = None
++     if stack_info:
++       sinfo = '\n'.join(_traceback.format_stack())
++     if code:
++       return (code.co_filename, frame.f_lineno, code.co_name, sinfo)
++     else:
++       return '(unknown file)', 0, '(unknown function)', sinfo
++elif _sys.version_info.major >= 3 and _sys.version_info.minor >= 2:
+   def _logger_find_caller(stack_info=False):  # pylint: disable=g-wrong-blank-lines
+     code, frame = _get_caller(4)
+     sinfo = None
