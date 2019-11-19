@@ -10,11 +10,9 @@
     HDF5 API, while the high-level component supports access to HDF5 files, datasets and 
     groups using established Python and NumPy concepts
   build:
-#    configure: echo
     pkgmake: >
       python{{ pymajor }} ./setup.py configure --hdf5=$$HDF5_HOME;
       python{{ pymajor }} ./setup.py build
     modules: 
       - python/{{ pyversion }}
-      - hdf5/{{ versions.hdf5 }}/gcc{{ versions.gcc }}
-#    target: build
+      - hdf5/{{ versions.hdf5 }}/gcc.{{ versions.gcc }}
