@@ -1,18 +1,22 @@
-# tensorflow-admix
-Building tensorflow 
-See generic step instructions to compile from source https://www.tensorflow.org/install/source
-Outline of specific build instrucionts is in `yamlspecs/README-build-tensorflow`
+## tensorflow-admix
+Building tensorflow. 
 
-## Download source
+See generic step instructions to compile from source https://www.tensorflow.org/install/source. 
+Details of specific build instrucionts is in `yamlspecs/README-build-tensorflow`
+
+### Download source
 
 Download a release https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0
 
-## Prerequisites
+### Prerequisites
 
 Build/install all the prerequisites.
 
-1. Python packages prerequisites are specified in tensorflow source
-   in tensorflow-X/tensorflow/tools/pip_package/setup.py
+1. **Python prerequisites**
+
+   Using the latest python 3.8.0.
+   Python packages prerequisites are specified in tensorflow source
+   in tensorflow-VERSION/tensorflow/tools/pip_package/setup.py
    For tensorflow v 2.0.0: 
    - absl-py >= 0.7.0
    - astor >= 0.6.0
@@ -31,18 +35,23 @@ Build/install all the prerequisites.
    - wheel >= 0.26
    - six >= 1.12.0
 
-   The packages and theri specific versions are listed in packages.yaml and versions.yaml
+   The packages and their specific versions are listed in `packages.yaml` and `versions.yaml`
 
-   Note: gast 0.3+ no longer has attribute `Num`, which is required by tensroflow. The built
-   tensorflow package when imported fails with `AttributeError: module 'gast' has no attribute 'Num'`
+   **Note:** gast 0.3+ no longer has attribute `Num`, which is required by tensroflow. The built
+   tensorflow package fails on import with `AttributeError: module 'gast' has no attribute 'Num'`
    Use older gast verison 0.2.2. 
 
-1. Install bazel from source. See https://docs.bazel.build/versions/master/install.html for details.
+1. **Bazel**
+
+   Install bazel from source. See https://docs.bazel.build/versions/master/install.html for details.
    Make sure to use a supported bazel version: any version between _TF_MIN_BAZEL_VERSION and 
    _TF_MAX_BAZEL_VERSION as specified in tensorflow/configure.py. Currently supported is 0.26.1
 
-1. Install GPU support.  See https://www.tensorflow.org/install/gpu for details
-   Note, most packaghes are related by verison of CUDA and cuDNN.
+1. **GPU support**  
+
+   See https://www.tensorflow.org/install/gpu for details
+   **NOTE:** most packaghes are related by verison of CUDA and cuDNN. See specific versions
+   in `versions.yaml`
 
    The following NVIDIA® software must be installed:
    - CUDA® Toolkit —TensorFlow supports CUDA 10.0 
@@ -57,7 +66,9 @@ Build/install all the prerequisites.
      whl files and install packaged  contents. Requires cuDNN
      Install instructions https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing-tar
 
-1. If want to run the OpenCL™ version of TensorFlow™ using ComputeCpp, a SYCL™ implementation
+1. **Optional ComputeCPP**
+  
+   If want to run the OpenCL™ version of TensorFlow™ using ComputeCpp, a SYCL™ implementation
    need to install ComputeCpp.  Register at codeplay in order to download the source distro.
    Current version is ComputeCpp v1.1.6: Changes to Work-item Mapping Optimization
    See https://codeplay.com/portal/11-18-19-computecpp-v1-1-6-changes-to-work-item-mapping-optimization
@@ -71,9 +82,9 @@ Build/install all the prerequisites.
    Generic instruction for building tensorflow with OpenCL support are 
    https://developer.codeplay.com/products/computecpp/ce/guides/tensorflow-guide/tensorflow-generic-setup
 
-   NOTE: installed ComputeCPP but NOT USING with tensorflow build
+   **NOTE:** installed ComputeCPP but NOT USING with tensorflow build
 
-## Patch tensorflow source.
+### Patch tensorflow source.
 
 The Tensorflwo v.2.0.0 had a few bugs that require fixes.
 
@@ -103,7 +114,7 @@ Create a single patch file for all 5 patches and apply whil in top extraceted so
 patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
 ```
 
-## Configure the build
+### Configure the build
 
 Load modules to setup environment and configure system build via the `./configure` at the root of the source tree. 
 This script prompts for the location of TensorFlow dependencies and asks for additional build configuration options.
@@ -116,10 +127,10 @@ module load foundation
 ./configure
 ```
 
-NOTE: need git that understands `-C` flag (provided by foundation is 2.23)
-See yamlspecs/README-build-tensorflow  for a complete set of questions.
+**NOTE:** need git that understands `-C` flag (provided by foundation module is 2.23).
+See yamlspecs/README-build-tensorflow for a complete set of questions.
 
-NOTE: For compilation optimization flags, the default (`-march=native`) optimizes the generated code 
+**NOTE:** For compilation optimization flags, the default (`-march=native`) optimizes the generated code 
 for the machine's CPU type where the build is run. For building TensorFlow for a different CPU type, 
 need a more specific optimization flag. See the GCC manual for examples:
 https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html
@@ -129,9 +140,9 @@ Option used for current build is `-march=core-avx2`
 After running `./configure` a configuration file `.tf_configure.bazelrc` is created in the
 current directory and it will be used by bazel build.
 
-## Build the bazel package
+### Build the bazel package
 
-### Run bazel build command
+#### Run bazel build command
 Specify memory resources as an option so that the build does not run out of memory.
 ```bash
 nohup bazel build --local_ram_resources=4096 \
@@ -140,10 +151,9 @@ nohup bazel build --local_ram_resources=4096 \
 
 Bazel build on a VM with 2 cores and 8Gb memory takes ~14hrs.
 
-### Run build_pip_package command
+#### Run build_pip_package command
 The bazel build command creates an executable `build_pip_package`, this is the program that builds the 
-pip package. Run the executable to build a .whl package in the /tmp/tensorflow_pkg directory from a
-release branch:
+`.whl` package. Run the executable in the /tmp/tensorflow_pkg directory to build from a release branch:
 ```bash
 ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 ```
@@ -154,6 +164,6 @@ for example, `tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl`
 
 Copy the resulting `.whl` file to `tensorflow-admix/sources`
 
-## Install the package
+### Install the package
 
-Use yamlspecs/tensorflow.yaml to generate RPM from the `.whl` file.
+Use `yamlspecs/tensorflow.yaml` to generate RPM from the `.whl` file.
