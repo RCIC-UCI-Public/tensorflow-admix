@@ -22,7 +22,7 @@
      makeinstall: >
        /usr/bin/mv * $(ROOT)/{{ root }}
   files:
-    -  "{{ root }}/*"
+    -  "{{ pkg_defaults.app_path }}/{{name}}"
   rpm:
     extras: >
       %define __spec_install_post %{nil}
