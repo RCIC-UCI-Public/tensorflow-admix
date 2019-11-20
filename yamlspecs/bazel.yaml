@@ -25,7 +25,7 @@
       echo '{{ build.pkgmake }}' > $(ROOT){{ root }}/etc/{{ name }}.sh;
       $(INSTALL) -m755 {{ bdir }}/output/bazel $(ROOT){{root}}/bin/
   files:
-    - "{{ root }}"
+    - "{{ pkg_defaults.app_path }}/{{name}}"
   rpm:
     extras: >
       %define __spec_install_post %{nil}
