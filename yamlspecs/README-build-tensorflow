@@ -152,7 +152,7 @@ patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
 #-rwxr-xr-x 1 root root 10545 Oct  7 18:48 tensorflow/tools/pip_package/build_pip_package.sh
 
 # Build whl file
-./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow.pkg
+./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 Thu Nov 14 10:43:03 PST 2019 : === Preparing sources in dir: /tmp/tmp.arT87OztXt
 /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0 /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0
 /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.0.0
