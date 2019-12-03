@@ -1,6 +1,5 @@
 ---
 bootstrap:
-  - cudnn-download
 build:
   - absl-py
   - astor
@@ -31,7 +30,4 @@ system:
   - yum-utils
   - java-11-openjdk-devel
 manifest:
-  - "{{ build }}"
-  - libcudnn7-7.6.4.38-1.cuda10.1
-  - libcudnn7-devel-7.6.4.38-1.cuda10.1
-  - libcudnn7-doc-7.6.4.38-1.cuda10.1
+  - "{{build}}"
