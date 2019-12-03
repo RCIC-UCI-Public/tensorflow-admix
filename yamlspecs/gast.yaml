@@ -2,7 +2,7 @@
 ---
 - package: gast 
   name: gast
-  version: "{{ versions.gast }}"
+  version: "{{versions.gast}}"
   pypiurl: https://files.pythonhosted.org/packages/4e/35/11749bf99b2d4e3cceb4d55ca22590b0d7c2c62b9de38ac4a4a7f4687421
   description: |
     A generic AST to represent Python2 and Python3's Abstract Syntax Tree(AST).

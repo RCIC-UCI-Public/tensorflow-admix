@@ -2,7 +2,7 @@
 ---
 - package: h5py 
   name: h5py
-  version: "{{ versions.h5py }}"
+  version: "{{versions.h5py}}"
   pypiurl: https://files.pythonhosted.org/packages/5f/97/a58afbcf40e8abecededd9512978b4e4915374e5b80049af082f49cebe9a
   description: |
     The h5py package provides both a high- and low-level interface to the HDF5 library 
@@ -11,8 +11,8 @@
     groups using established Python and NumPy concepts
   build:
     pkgmake: >
-      python{{ pymajor }} ./setup.py configure --hdf5=$$HDF5_HOME;
-      python{{ pymajor }} ./setup.py build
+      python{{pymajor}} ./setup.py configure --hdf5=$$HDF5_HOME;
+      python{{pymajor}} ./setup.py build
     modules: 
-      - python/{{ pyversion }}
-      - hdf5/{{ versions.hdf5 }}/gcc.{{ versions.gcc }}
+      - python/{{pyversion}}
+      - hdf5/{{versions.hdf5}}/gcc.{{versions.gcc}}

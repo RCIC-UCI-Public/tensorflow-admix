@@ -2,11 +2,11 @@
 ---
 - package: Markdown 
   name: Markdown
-  version: "{{ versions.markdown }}"
+  version: "{{versions.markdown}}"
   pypiurl: https://files.pythonhosted.org/packages/ac/df/0ae25a9fd5bb528fe3c65af7143708160aa3b47970d5272003a1ad5c03c6
   description: |
     This is a Python implementation of John Gruber's Markdown. It is almost completely 
     compliant with the reference implementation, though there are a few known issues
   files:
-    - "{{ root }}/bin/*"
-    - "{{ root }}/lib/python{{ pyfamily }}/site-packages/*"
+    - "{{root}}/bin/*"
+    - "{{root}}/lib/python{{pyfamily}}/site-packages/*"

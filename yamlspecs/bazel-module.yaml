@@ -3,8 +3,8 @@
 !include /opt/rcic/include/rcic-module.yaml
 ---
 - package: bazel module 
-  pkgname: "{{ name }}_{{version}}-module"
+  pkgname: "{{name}}_{{version}}-module"
   category: TOOLS
   module:
     prepend_path:
-      - PATH {{ root }}/bin
+      - PATH {{root}}/bin

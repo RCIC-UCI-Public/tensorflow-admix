@@ -2,10 +2,10 @@
 ---
 - package: protobuf 
   name: protobuf
-  version: "{{ versions.protobuf }}"
+  version: "{{versions.protobuf}}"
   pypiurl: https://files.pythonhosted.org/packages/12/b9/e7c6a58613c9fe724d1ff9f2353fa48901e6b1b99d0ba64c36a8de2cfa45
   description: |
     Protocol Buffers are Google's data interchange format
   files:
-    - "{{ root }}/lib/python{{ pyfamily }}/site-packages/google/*"
-    - "{{ root }}/lib/python{{ pyfamily }}/site-packages/{{ name }}*"
+    - "{{root}}/lib/python{{pyfamily}}/site-packages/google/*"
+    - "{{root}}/lib/python{{pyfamily}}/site-packages/{{name}}*"

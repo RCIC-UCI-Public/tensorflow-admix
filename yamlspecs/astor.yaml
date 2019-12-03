@@ -2,7 +2,7 @@
 ---
 - package: astor 
   name: astor
-  version: "{{ versions.astor }}"
+  version: "{{versions.astor}}"
   pypiurl: https://files.pythonhosted.org/packages/4c/49/ebd87c47d8d0adf948850429b5360deb3bed1835c16393ad92e1f598bb43
   description: |
     Read/rewrite/write Python abstract syntax trees (ASTs)

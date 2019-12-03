@@ -1,18 +1,17 @@
+!include /opt/rcic/include/rcic-package.yaml
 ---
 - package: computecpp
   name: computecpp
   distname: ComputeCpp-CE
   suffix: CentOS-x86_64
   versions: !include versions.yaml
-  version: "{{ versions.computecpp }}"
-  extension: tar.gz
+  version: "{{versions.computecpp}}"
   vendor_source: 
-  pkgname: "{{ name }}_{{version}}"
-  src_tarball: "{{ src_dir }}.{{ extension }}"
-  src_dir: "{{ distname }}-{{ version }}-{{ suffix }}"
+  pkgname: "{{name}}_{{version}}"
+  src_tarball: "{{src_dir}}.{{extension}}"
+  src_dir: "{{distname}}-{{version}}-{{suffix}}"
   description: |
     Accelerate Complex C++ Applications on Heterogeneous Compute Systems using Open Standards version {{version}}
-  root: "{{ pkg_defaults.app_path }}/{{name}}/{{version}}"
   build:
     configure: echo 
     modules: 
@@ -20,9 +19,7 @@
     target: 
   install:
      makeinstall: >
-       /usr/bin/mv * $(ROOT)/{{ root }}
-  files:
-    -  "{{ pkg_defaults.app_path }}/{{name}}"
+       /usr/bin/mv * $(ROOT)/{{root}}
   rpm:
     extras: >
       %define __spec_install_post %{nil}

@@ -1,6 +1,11 @@
-!include pymodule.yaml
 ---
 - package: TensorRT
+  extension: tar.gz
+  versions: !include versions.yaml
+  pyversion: "{{versions.python_version}}"
+  pyfamily: "{{versions.python_family}}"
+  pymajor: "{{versions.python_major}}"
+  cudaversion: "{{versions.cuda}}"
   distname: TensorRT
   name: tensorRT 
   pkgname: "{{name}}_{{version}}_python{{pyversion}}"
@@ -16,7 +21,7 @@
   src_dir: "{{distname}}-{{version}}"
   root: "{{pkg_defaults.app_path}}/{{name}}/{{version}}"
   pyroot: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
-  contents: bin  doc  include  lib  samples 
+  contents: bin doc include lib samples 
   pysuffix: cp36-none-linux_x86_64
   addfile: 
     - filter-requires-{{name}}.sh

@@ -1,29 +1,25 @@
 ---
-- versions: !include versions.yaml
-  pyversion: "{{ versions.python_version }}"
-  pyfamily: "{{ versions.python_family }}"
-  pymajor: "{{ versions.python_major }}"
-  cudaversion: "{{ versions.cuda}}"
-
+- name: common
+  versions: !include versions.yaml
+  pyversion: "{{versions.python_version}}"
+  pyfamily: "{{versions.python_family}}"
+  pymajor: "{{versions.python_major}}"
+  cudaversion: "{{versions.cuda}}"
   extension: tar.gz
-  vendor_source:  "{{ pypiurl }}/{{ name }}-{{ version }}.{{ extension }}"
-  pkgname: "tensorflow-python{{pyversion}}-{{ name }}_{{version}}"
-  src_tarball: "{{ name }}-{{ version}}.{{ extension }}"
-  src_dir: "{{ name }}-{{ version }}"
-  root: "{{ pkg_defaults.app_path }}/python/{{ pyversion }}"
-
+  vendor_source:  "{{pypiurl}}/{{name}}-{{version}}.{{extension}}"
+  pkgname: "tensorflow-python{{pyversion}}-{{name}}_{{version}}"
+  src_tarball: "{{name}}-{{version}}.{{extension}}"
+  src_dir: "{{name}}-{{version}}"
+  root: "{{pkg_defaults.app_path}}/python/{{pyversion}}"
   build:
     configure: echo No configure required
-    modules: python/{{ pyversion }}
-    pkgmake: python{{ pymajor }} ./setup.py  
+    modules: python/{{pyversion}}
+    pkgmake: python{{pymajor}} ./setup.py  
     target: build
   install:
-    makeinstall: python{{ pymajor }} ./setup.py install --root=$(ROOT) 
-
+    makeinstall: python{{pymajor}} ./setup.py install --root=$(ROOT) 
   requires:
-    python_{{ pyversion }}
-
+    python_{{pyversion}}
   files: 
-    - "{{ root }}/lib/python{{ pyfamily }}/site-packages/*"
-
+    - "{{root}}/lib/python{{pyfamily}}/site-packages/*"
   rpm: !include rpm.extras.yaml

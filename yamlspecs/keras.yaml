@@ -2,7 +2,7 @@
 ---
 - package: keras 
   name: Keras
-  version: "{{ versions.keras }}"
+  version: "{{versions.keras}}"
   pypiurl: https://files.pythonhosted.org/packages/24/f1/7b851387dd9587208d40786be2c9270d557ed76cd39b2aa9b93e86c8a746
   description: |
     Deep learning for humans
@@ -12,5 +12,5 @@
       - Supports both convolutional networks and recurrent networks, as well as combinations of the two
       - Runs seamlessly on CPU and GPU
   requires:
-    - python_{{ pyversion }}
-    - python_{{ pyversion }}-PyYAML
+    - python_{{pyversion}}
+    - python_{{pyversion}}-PyYAML

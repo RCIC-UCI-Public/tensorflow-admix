@@ -3,11 +3,11 @@
 !include /opt/rcic/include/rcic-module.yaml
 ---
 - package: computecpp module 
-  pkgname: "{{ name }}_{{version}}-module"
+  pkgname: "{{name}}_{{version}}-module"
   category: TOOLS
   module:
     prepend_path:
-      - PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/bin"
-      - LD_LIBRARY_PATH "{{ pkg_defaults.app_path }}/{{ name }}/{{ version }}/lib"
+      - PATH "{{pkg_defaults.app_path}}/{{name}}/{{version}}/bin"
+      - LD_LIBRARY_PATH "{{pkg_defaults.app_path}}/{{name}}/{{version}}/lib"
       - LDFLAGS "-L{{root}}/lib"
       - CPPFLAGS "-I{{root}}/include"
