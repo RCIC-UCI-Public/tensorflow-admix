@@ -1,6 +1,6 @@
 # Builds the module for tensorRT.
 !include tensorRT.yaml
-!include /opt/rcic/include/rcic-module.yaml
+!include rcic-module.yaml
 ---
 - package: tensorRT module 
   pkgname: "{{name}}_{{version}}_python{{pyversion}}-module"

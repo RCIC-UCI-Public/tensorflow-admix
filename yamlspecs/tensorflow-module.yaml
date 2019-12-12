@@ -1,6 +1,6 @@
 # Builds the module for tensorflow
 !include tensorflow.yaml
-!include /opt/rcic/include/rcic-module.yaml
+!include rcic-module.yaml
 ---
 - package: tensorflow module
   pkgname: "{{name}}_{{version}}_python{{pyversion}}-module"

@@ -1,9 +1,8 @@
 # Builds the module for computecpp.
 !include computecpp.yaml
-!include /opt/rcic/include/rcic-module.yaml
+!include rcic-module.yaml
 ---
 - package: computecpp module 
-  pkgname: "{{name}}_{{version}}-module"
   category: TOOLS
   module:
     prepend_path:
