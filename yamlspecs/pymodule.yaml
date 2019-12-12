@@ -14,8 +14,8 @@
   build:
     configure: echo No configure required
     modules: python/{{pyversion}}
-    pkgmake: python{{pymajor}} ./setup.py  
-    target: build
+    pkgmake:
+    target: 
   install:
     makeinstall: python{{pymajor}} ./setup.py install --root=$(ROOT) 
   requires:
