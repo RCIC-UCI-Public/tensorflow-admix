@@ -109,7 +109,7 @@ The Tensorflwo v.2.0.0 had a few bugs that require fixes.
    Create a patch for file:
    - tensorflow.orig/python/platform/tf_logging.py
 
-Create a single patch file for all 5 patches and apply whil in top extraceted source dir:
+Create a single patch file for all 5 patches and apply while in top extraceted source dir:
 ```bash
 patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
 ```
@@ -118,6 +118,7 @@ patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
 
 Load modules to setup environment and configure system build via the `./configure` at the root of the source tree. 
 This script prompts for the location of TensorFlow dependencies and asks for additional build configuration options.
+See yamlspecs/README-build-tensorflow for a complete set of questions.
 ```bash
 module load bazel/0.26.1 
 module load cuda/10.1.243
@@ -127,14 +128,12 @@ module load foundation
 ./configure
 ```
 
-**NOTE:** need git that understands `-C` flag (provided by foundation module is 2.23).
-See yamlspecs/README-build-tensorflow for a complete set of questions.
+**NOTE:** need git that understands `-C` flag (git provided by foundation module is 2.23).
 
 **NOTE:** For compilation optimization flags, the default (`-march=native`) optimizes the generated code 
 for the machine's CPU type where the build is run. For building TensorFlow for a different CPU type, 
 need a more specific optimization flag. See the GCC manual for examples:
 https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html
-
 Option used for current build is `-march=core-avx2`
 
 After running `./configure` a configuration file `.tf_configure.bazelrc` is created in the
@@ -153,16 +152,16 @@ Bazel build on a VM with 2 cores and 8Gb memory takes ~14hrs.
 
 #### Run build_pip_package command
 The bazel build command creates an executable `build_pip_package`, this is the program that builds the 
-`.whl` package. Run the executable in the /tmp/tensorflow_pkg directory to build from a release branch:
+needed `.whl` package. Run the executable as:
 ```bash
 ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 ```
 
 This command generates a `.whl` file  in `/tmp/tensorflow_pkg/`.
-The filename of the generated .whl file depends on the TensorFlow version and the local platform,
-for example, `tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl`
+The filename of the generated `.whl` file depends on the TensorFlow version and on 
+the local platform, for example, `tensorflow-2.0.0-cp38-cp38-linux_x86_64.whl`
 
-Copy the resulting `.whl` file to `tensorflow-admix/sources`
+Copy the resulting `.whl` file to `tensorflow-admix/sources/`
 
 ### Install the package
 

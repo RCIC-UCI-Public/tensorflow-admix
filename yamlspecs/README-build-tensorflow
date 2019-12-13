@@ -1,21 +1,21 @@
 #!/bin/bash
 
-# track of built steps. 
+# Track of built steps. 
 # will need to be run via Makefile as a separate
-# target or directly via shell script. Takes too long ~14hrs
-# to compile build_pip_package
+# target or directly via shell script. 
+# Takes ~14hrs to compile build_pip_package
 
 # Checkout tensorflow from git and switch to last branch
-git clone https://github.com/tensorflow/tensorflow
-cd tensorflow
-git describe --tags
-git checkout r2.0
-git branch
+# better use option below for checking out "known" release.
+#    git clone https://github.com/tensorflow/tensorflow
+#    cd tensorflow
+#    git describe --tags
+#    git checkout r2.0
+#    git branch
  
-# Alternatively get a known release from github https://github.com/tensorflow/tensorflow/tags
+# Better option: get a known release from github https://github.com/tensorflow/tensorflow/tags
 wget https://github.com/tensorflow/tensorflow/archive/v2.0.0.tar.gz
 tar xzvf v2.0.0.tar.gz
-cd tensorflow-2.0.0/
 
 # Load needed modules
 # first 4 - for main build
@@ -26,13 +26,13 @@ module load computecpp/1.1.6
 module load tensorRT/6.0.1.5 
 module load foundation
 
-### these are executed in tensorflow/ (git repo)
-# configure the build.Rub configure ocmmand abnd anwer the questions.
+# configure the build. Run configure command abd answer the questions.
 # the result is .tf_configure.bazelrc in the current directory
 # Note .bazelrc is included in the distro
+cd tensorflow-2.0.0/
 ./configure
 
-# Below is a configure session script Defaults are taken (hit return) 
+# Below is a configure session script. Defaults are taken (hit return) 
 # where acceptable values were provided or hinted. 
 WARNING: --batch mode is deprecated. Please instead explicitly shut down your Bazel server using the command "bazel shutdown".
 You have bazel 0.26.1- (@non-git) installed.
@@ -107,27 +107,28 @@ Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]:
 Not configuring the WORKSPACE for Android builds.
 
 Preconfigured Bazel build configs. You can use any of the below by adding "--config=<>" to your build command. See .bazelrc for more details.
-	--config=mkl         	# Build with MKL support.
-	--config=monolithic  	# Config for mostly static monolithic build.
-	--config=gdr         	# Build with GDR support.
-	--config=verbs       	# Build with libverbs support.
-	--config=ngraph      	# Build with Intel nGraph support.
-	--config=numa        	# Build with NUMA support.
-	--config=dynamic_kernels	# (Experimental) Build kernels into separate shared objects.
-	--config=v2          	# Build TensorFlow 2.x instead of 1.x.
+	--config=mkl         	 # Build with MKL support.
+	--config=monolithic  	 # Config for mostly static monolithic build.
+	--config=gdr         	 # Build with GDR support.
+	--config=verbs       	 # Build with libverbs support.
+	--config=ngraph      	 # Build with Intel nGraph support.
+	--config=numa        	 # Build with NUMA support.
+	--config=dynamic_kernels # (Experimental) Build kernels into separate shared objects.
+	--config=v2          	 # Build TensorFlow 2.x instead of 1.x.
+
 Preconfigured Bazel build configs to DISABLE default on features:
-	--config=noaws       	# Disable AWS S3 filesystem support.
-	--config=nogcp       	# Disable GCP support.
-	--config=nohdfs      	# Disable HDFS support.
-	--config=noignite    	# Disable Apache Ignite support.
-	--config=nokafka     	# Disable Apache Kafka support.
-	--config=nonccl      	# Disable NVIDIA NCCL support.
+	--config=noaws       	 # Disable AWS S3 filesystem support.
+	--config=nogcp       	 # Disable GCP support.
+	--config=nohdfs      	 # Disable HDFS support.
+	--config=noignite    	 # Disable Apache Ignite support.
+	--config=nokafka     	 # Disable Apache Kafka support.
+	--config=nonccl          # Disable NVIDIA NCCL support.
 Configuration finished
 
 # Check the resulting .tf_configure.bazelrc file.
-# NOTE1: edit it and change -march=native to -march=core-avx2
+# NOTE1: edit it and change -march=native to -march=core-avx2 for better cpu optimizaton
 
-# bazel build takes forever, On a VM with 2 cores and 8Gb memory ~14hrs
+# The bazel build takes forever, On a VM with 2 cores and 8Gb memory ~14hrs
 nohup bazel build --local_ram_resources=4096 --verbose_failures //tensorflow/tools/pip_package:build_pip_package >  ../build-out &
 
 # First run failed with: 
@@ -145,7 +146,7 @@ nohup bazel build --local_ram_resources=4096 --verbose_failures //tensorflow/too
 # it before running bazel again:
 patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
 
-# AFter bazel buid finisheds have build_pip_package:
+# AFter bazel buid finishes, have build_pip_package:
 #file bazel-bin/tensorflow/tools/pip_package/build_pip_package
 #tensorflow/bazel-bin/tensorflow/tools/pip_package/build_pip_package: symbolic link to /export/repositories/tensorflow-admix/yamlspecs/tensorflow/tensorflow/tools/pip_package/build_pip_package.sh
 #ll tensorflow/tools/pip_package/build_pip_package.sh
