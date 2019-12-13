@@ -20,5 +20,22 @@
       mkdir -p $(ROOT)/{{root}};
       unzip -d $(ROOT)/{{root}} {{src_tarball}};
       (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{name}}*)
+  requires:
+    - python_{{pyversion}}
+    - python_{{pyversion}}-numpy
+    - python_{{pyversion}}-six
+    - tensorflow-python_{{pyversion}}-absl-py
+    - tensorflow-python_{{pyversion}}-astor
+    - tensorflow-python_{{pyversion}}-backports.weakref
+    - tensorflow-python_{{pyversion}}-gast
+    - tensorflow-python_{{pyversion}}-google_pasta
+    - tensorflow-python_{{pyversion}}-Keras_applications
+    - tensorflow-python_{{pyversion}}-Keras_preprocessing
+    - tensorflow-python_{{pyversion}}-opt_einsum
+    - tensorflow-python_{{pyversion}}-protobuf
+    - tensorflow-python_{{pyversion}}-tensorboard
+    - tensorflow-python_{{pyversion}}-tensorflow_estimator
+    - tensorflow-python_{{pyversion}}-termcolor
+    - tensorflow-python_{{pyversion}}-wrapt
   files: 
     - "{{root}}/*"
