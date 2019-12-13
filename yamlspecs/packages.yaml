@@ -1,6 +1,5 @@
 ---
 bootstrap:
-build:
   - absl-py
   - astor
   - backports-weakref
@@ -26,6 +25,9 @@ build:
   - bazel-module
   - computecpp
   - computecpp-module
+build:
+  - tensorflow
+  - tensorflow-module
 system:
   - yum-utils
   - java-11-openjdk-devel
