@@ -11,9 +11,6 @@
   description: |
     TensorBoard is a suite of web applications for inspecting and understanding your TensorFlow runs and graphs
   instpath: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
-#  build: 
-#    OVERWRITE:
-#    modules: python/{{pyversion}}
   install:
     makeinstall: >
       mkdir -p $(ROOT)/{{instpath}};
