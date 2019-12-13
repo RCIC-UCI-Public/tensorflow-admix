@@ -11,8 +11,6 @@
   description: |
     TensorFlow Estimator is a high-level API that encapsulates model training, evaluation, prediction, and exporting
   instpath: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
-#  build: 
-#    modules: python/{{pyversion}}
   install:
     makeinstall: >
       mkdir -p $(ROOT)/{{instpath}};
