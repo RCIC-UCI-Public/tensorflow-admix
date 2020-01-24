@@ -68,11 +68,12 @@ Build/install all the prerequisites.
 
 1. **Optional ComputeCPP**
   
+   Moved ComptuteCPP to parallel-admix 2020-01-24
+  
    If want to run the OpenCL™ version of TensorFlow™ using ComputeCpp, a SYCL™ implementation
    need to install ComputeCpp.  Register at codeplay in order to download the source distro.
-   Current version is ComputeCpp v1.1.6: Changes to Work-item Mapping Optimization
-   See https://codeplay.com/portal/11-18-19-computecpp-v1-1-6-changes-to-work-item-mapping-optimization
-   Guides:
+   Current version is ComputeCpp v1.2.0: Changes to Work-item Mapping Optimization
+   See Guides:
    - https://developer.codeplay.com/products/computecpp/ce/guides
    - https://developer.codeplay.com/products/computecpp/ce/guides?render=pdf
    
