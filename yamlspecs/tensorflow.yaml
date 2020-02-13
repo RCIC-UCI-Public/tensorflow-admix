@@ -24,18 +24,18 @@
     - python_{{pyversion}}
     - python_{{pyversion}}-numpy
     - python_{{pyversion}}-six
-    - tensorflow-python_{{pyversion}}-absl-py
-    - tensorflow-python_{{pyversion}}-astor
-    - tensorflow-python_{{pyversion}}-backports.weakref
-    - tensorflow-python_{{pyversion}}-gast
-    - tensorflow-python_{{pyversion}}-google_pasta
-    - tensorflow-python_{{pyversion}}-Keras_applications
-    - tensorflow-python_{{pyversion}}-Keras_preprocessing
-    - tensorflow-python_{{pyversion}}-opt_einsum
-    - tensorflow-python_{{pyversion}}-protobuf
-    - tensorflow-python_{{pyversion}}-tensorboard
-    - tensorflow-python_{{pyversion}}-tensorflow_estimator
-    - tensorflow-python_{{pyversion}}-termcolor
-    - tensorflow-python_{{pyversion}}-wrapt
+    - tensorflow-python{{pyversion}}-absl-py_{{versions.absl_py}}
+    - tensorflow-python{{pyversion}}-astor_{{versions.astor}}
+    - tensorflow-python{{pyversion}}-backports.weakref_{{versions.backports_weakref}}
+    - tensorflow-python{{pyversion}}-gast_{{versions.gast}}
+    - tensorflow-python{{pyversion}}-google-pasta_{{versions.google_pasta}}
+    - tensorflow-python{{pyversion}}-Keras_Applications_{{versions.keras_applications}}
+    - tensorflow-python{{pyversion}}-Keras_Preprocessing_{{versions.keras_preprocessing}}
+    - tensorflow-python{{pyversion}}-opt_einsum_{{versions.opt_einsum}}
+    - tensorflow-python{{pyversion}}-protobuf_{{versions.protobuf}}
+    - tensorflow-python{{pyversion}}-tensorboard_{{versions.tensorboard}}
+    - tensorflow-python{{pyversion}}-tensorflow_estimator_{{versions.tensorflow_estimator}}
+    - tensorflow-python{{pyversion}}-termcolor_{{versions.termcolor}}
+    - tensorflow-python{{pyversion}}-wrapt_{{versions.wrapt}}
   files: 
     - "{{root}}/*"
