@@ -23,8 +23,6 @@ bootstrap:
   - tensorRT-module
   - bazel
   - bazel-module
-  - computecpp
-  - computecpp-module
 build:
   - tensorflow
   - tensorflow-module
