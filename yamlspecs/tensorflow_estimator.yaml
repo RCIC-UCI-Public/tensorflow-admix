@@ -6,7 +6,7 @@
   suffix: py2.py3-none-any
   extension: whl
   src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
-  pypiurl: https://files.pythonhosted.org/packages/95/00/5e6cdf86190a70d7382d320b2b04e4ff0f8191a37d90a422a2f8ff0705bb
+  pypiurl: https://files.pythonhosted.org/packages/a4/f5/926ae53d6a226ec0fda5208e0e581cffed895ccc89e36ba76a8e60895b78
   vendor_source:  "{{pypiurl}}/{{src_tarball}}"
   description: |
     TensorFlow Estimator is a high-level API that encapsulates model training, evaluation, prediction, and exporting

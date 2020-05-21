@@ -1,6 +1,6 @@
+!include rcic-package.yaml
 ---
 - package: TensorRT
-  extension: tar.gz
   versions: !include versions.yaml
   pyversion: "{{versions.python_version}}"
   pyfamily: "{{versions.python_family}}"
@@ -8,7 +8,7 @@
   cudaversion: "{{versions.cuda}}"
   distname: TensorRT
   name: tensorRT 
-  pkgname: "{{name}}_{{version}}_python{{pyversion}}"
+  baserpm: "{{name}}_{{version}}_python{{pyversion}}"
   version: "{{versions.tensorRT}}"
   suffix: CentOS-7.6.x86_64-gnu.cuda-10.1.cudnn7.6
   nvidiaurl: https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/6.0/GA_{{version}}/tars
@@ -19,7 +19,6 @@
     models via the Network Definition API or load a pre-defined model via the parsers 
     that allows TensorRT to optimize and run them on an NVIDIA GPU.
   src_dir: "{{distname}}-{{version}}"
-  root: "{{pkg_defaults.app_path}}/{{name}}/{{version}}"
   pyroot: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
   contents: bin doc include lib samples 
   pysuffix: cp36-none-linux_x86_64
@@ -39,6 +38,6 @@
       unzip -d $(ROOT)/{{pyroot}} python/*{{pysuffix}}.whl;
       (cd $(ROOT)/$(pyroot); chmod -R a+r * )
   files:
-    - "{{pkg_defaults.app_path}}/{{name}}"
+    - "{{parent}}"
     - "{{pyroot}}/*"
   rpm: !include rpm.extras.filter.yaml

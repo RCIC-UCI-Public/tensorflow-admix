@@ -1,9 +1,9 @@
 !include pymodule.yaml
 ---
 - package: Keras_Preprocessing 
-  name: Keras_Preprocessing
+  name: keras-preprocessing
   version: "{{versions.keras_preprocessing}}"
-  pypiurl: https://files.pythonhosted.org/packages/6d/2b/d45a295e6b31d8b6663b705dff2f178ae16e8d2eac41097810a411d7b10f
+  vendor_source: https://github.com/keras-team/keras-preprocessing/archive/{{version}}.{{extension}}
   description: |
     Keras Preprocessing is the data preprocessing and data augmentation module of 
     the Keras deep learning library. It provides utilities for working with image 

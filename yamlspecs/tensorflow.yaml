@@ -2,7 +2,7 @@
 ---
 - package: tensorflow
   name: tensorflow
-  pkgname: "{{name}}_{{version}}_python{{pyversion}}"
+  baserpm: "{{name}}_{{version}}_python{{pyversion}}"
   version: "{{versions.tensorflow}}"
   no_src_dir: True
   extension: whl
@@ -29,13 +29,11 @@
     - tensorflow-python{{pyversion}}-backports.weakref_{{versions.backports_weakref}}
     - tensorflow-python{{pyversion}}-gast_{{versions.gast}}
     - tensorflow-python{{pyversion}}-google-pasta_{{versions.google_pasta}}
-    - tensorflow-python{{pyversion}}-Keras_Applications_{{versions.keras_applications}}
-    - tensorflow-python{{pyversion}}-Keras_Preprocessing_{{versions.keras_preprocessing}}
+    - tensorflow-python{{pyversion}}-keras-applications_{{versions.keras_applications}}
+    - tensorflow-python{{pyversion}}-keras-preprocessing_{{versions.keras_preprocessing}}
     - tensorflow-python{{pyversion}}-opt_einsum_{{versions.opt_einsum}}
     - tensorflow-python{{pyversion}}-protobuf_{{versions.protobuf}}
     - tensorflow-python{{pyversion}}-tensorboard_{{versions.tensorboard}}
     - tensorflow-python{{pyversion}}-tensorflow_estimator_{{versions.tensorflow_estimator}}
     - tensorflow-python{{pyversion}}-termcolor_{{versions.termcolor}}
     - tensorflow-python{{pyversion}}-wrapt_{{versions.wrapt}}
-  files: 
-    - "{{root}}/*"

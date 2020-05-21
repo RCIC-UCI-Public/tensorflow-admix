@@ -2,7 +2,6 @@
 ---
 - package: bazel 
   name: bazel 
-  pkgname: "{{name}}_{{version}}"
   versions: !include versions.yaml
   version: "{{versions.bazel}}"
   suffix: dist

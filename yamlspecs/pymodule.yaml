@@ -1,15 +1,13 @@
+!include rcic-package.yaml
 ---
 - name: common
   versions: !include versions.yaml
+  baserpm: "tensorflow-python{{pyversion}}-{{name}}_{{version}}"
   pyversion: "{{versions.python_version}}"
   pyfamily: "{{versions.python_family}}"
   pymajor: "{{versions.python_major}}"
   cudaversion: "{{versions.cuda}}"
-  extension: tar.gz
   vendor_source:  "{{pypiurl}}/{{name}}-{{version}}.{{extension}}"
-  pkgname: "tensorflow-python{{pyversion}}-{{name}}_{{version}}"
-  src_tarball: "{{name}}-{{version}}.{{extension}}"
-  src_dir: "{{name}}-{{version}}"
   root: "{{pkg_defaults.app_path}}/python/{{pyversion}}"
   build:
     configure: echo No configure required
@@ -21,5 +19,5 @@
   requires:
     python_{{pyversion}}
   files: 
-    - "{{root}}/lib/python{{pyfamily}}/site-packages/*"
+    - "{{root}}"
   rpm: !include rpm.extras.yaml

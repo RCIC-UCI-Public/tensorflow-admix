@@ -1,9 +1,9 @@
 !include pymodule.yaml
 ---
 - package: Werkzeug 
-  name: Werkzeug
+  name: werkzeug
   version: "{{versions.werkzeug}}"
-  pypiurl: https://files.pythonhosted.org/packages/5e/fd/eb19e4f6a806cd6ee34900a687f181001c7a0059ff914752091aba84681f
+  vendor_source: https://github.com/pallets/werkzeug/archive/{{version}}.{{extension}}
   description: |
     Werkzeug is a comprehensive WSGI web application library. It began as a 
     simple collection of various utilities for WSGI applications and has become 

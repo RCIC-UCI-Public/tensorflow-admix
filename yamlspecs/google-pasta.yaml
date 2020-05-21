@@ -4,9 +4,10 @@
   name: google-pasta
   release: 2
   version: "{{versions.google_pasta}}"
-  pypiurl: https://files.pythonhosted.org/packages/7a/4e/c3e35716d57eba02e49b8ad72a744435df1935f189fbc5f47edafb6d4f00
+  vendor_source: https://github.com/google/pasta/archive/v{{version}}.{{extension}}
+  src_dir: pasta-{{version}}
   description: |
     Pasta is an AST-based Python refactoring library
-
   install:
-     installextra: find $(ROOT)/{{root}} -type d -name '*egg-info' | xargs chmod -R o+r 
+    installextra: find $(ROOT)/{{root}} -type d -name '*egg-info' | xargs chmod -R o+r 
+

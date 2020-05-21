@@ -3,6 +3,6 @@
 - package: grpcio 
   name: grpcio
   version: "{{versions.grpcio}}"
-  pypiurl: https://files.pythonhosted.org/packages/0c/7b/97fce81c5f9bbe989c2f11e9d179b953f56c765af9427005e7d2f58277aa
+  pypiurl: https://files.pythonhosted.org/packages/f1/23/62d3e82fa4c505f3195315c8a774b2e656b556d174329aa98edb829e48bc
   description: |
     Package for gRPC Python. HTTP/2-based RPC framework

@@ -6,7 +6,7 @@
   suffix: py3-none-any
   extension: whl
   src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
-  pypiurl: https://files.pythonhosted.org/packages/9b/a6/e8ffa4e2ddb216449d34cfcb825ebb38206bee5c4553d69e7bc8bc2c5d64
+  pypiurl: https://files.pythonhosted.org/packages/1d/fd/4f3ca1516cbb3713259ef229abd9314bba0077ef6070285dde0dd1ed21b2
   vendor_source:  "{{pypiurl}}/{{src_tarball}}"
   description: |
     TensorBoard is a suite of web applications for inspecting and understanding your TensorFlow runs and graphs

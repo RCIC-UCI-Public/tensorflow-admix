@@ -3,15 +3,14 @@
 !include rcic-module.yaml
 ---
 - package: tensorflow module
-  pkgname: "{{name}}_{{version}}_python{{pyversion}}-module"
   category: AI-LEARNING
   module:
-    prepend_path:
-      - PATH "{{pkg_defaults.app_path}}/{{name}}/{{version}}/bin"
-      - LD_LIBRARY_PATH "{{pkg_defaults.app_path}}/{{name}}/{{version}}/lib"
+    prepend_path: ""
+    setenv: ""
     prereq:
       - python/{{pyversion}}
       - cuda/{{cudaversion}}
-  requires:
-    - "{{name}}_{{version}}_python{{pyversion}}"
-    - rcic-module-support
+    requires:
+      - *Requires
+      - python_{{pyversion}}-module
+      - cuda_{{cudaversion}}-module

@@ -3,6 +3,6 @@
 - package: opt_einsum 
   name: opt_einsum
   version: "{{versions.opt_einsum}}"
-  pypiurl: https://files.pythonhosted.org/packages/b8/83/755bd5324777875e9dff19c2e59daec837d0378c09196634524a3d7269ac
+  vendor_source: https://github.com/dgasmith/opt_einsum/archive/v{{version}}.{{extension}}
   description: |
     Optimizing numpys einsum function
