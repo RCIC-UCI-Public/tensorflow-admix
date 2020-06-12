@@ -1,11 +1,12 @@
-!include rcic-package.yaml
+#!include rcic-package.yaml
+!include pymodule.yaml
 ---
 - package: TensorRT
-  versions: !include versions.yaml
-  pyversion: "{{versions.python_version}}"
-  pyfamily: "{{versions.python_family}}"
-  pymajor: "{{versions.python_major}}"
-  cudaversion: "{{versions.cuda}}"
+# versions: !include versions.yaml
+# pyversion: "{{versions.python_version}}"
+# pyfamily: "{{versions.python_family}}"
+# pymajor: "{{versions.python_major}}"
+# cudaversion: "{{versions.cuda}}"
   distname: TensorRT
   name: tensorRT 
   baserpm: "{{name}}_{{version}}_python{{pyversion}}"
@@ -19,16 +20,17 @@
     models via the Network Definition API or load a pre-defined model via the parsers 
     that allows TensorRT to optimize and run them on an NVIDIA GPU.
   src_dir: "{{distname}}-{{version}}"
+  root: "{{parent}}/{{version}}"
   pyroot: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
   contents: bin doc include lib samples 
   pysuffix: cp36-none-linux_x86_64
   addfile: 
     - filter-requires-{{name}}.sh
-  build:
-    configure: echo configure not used 
-    modules: python/{{pyversion}}
-    pkgmake: 
-    target:  
+# build:
+#   configure: echo configure not used 
+#   modules: python/{{pyversion}}
+#   pkgmake: 
+#   target:  
   install:
     makeinstall: >
       for x in {{contents}}; do cp -pR $$x/ $(ROOT){{root}}; done;
@@ -40,4 +42,4 @@
   files:
     - "{{parent}}"
     - "{{pyroot}}/*"
-  rpm: !include rpm.extras.filter.yaml
+  rpmFilters: *Requires
