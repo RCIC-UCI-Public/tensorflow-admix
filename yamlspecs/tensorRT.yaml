@@ -42,4 +42,4 @@
   files:
     - "{{parent}}"
     - "{{pyroot}}/*"
-  rpmFilters: *Requires
+  rpmFilters: *filterRequires
