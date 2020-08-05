@@ -7,7 +7,6 @@ bootstrap:
   - google-pasta
   - keras_applications
   - keras_preprocessing
-  - h5py
   - keras
   - opt_einsum
   - grpcio
@@ -30,4 +29,5 @@ system:
   - yum-utils
   - java-11-openjdk-devel
 manifest:
+  - "{{bootstrap}}"
   - "{{build}}"
