@@ -4,6 +4,7 @@
 ---
 - package: tensorflow module
   category: AI-LEARNING
+  release: 2
   module:
     prepend_path: ""
     setenv: ""
@@ -12,5 +13,4 @@
       - cuda/{{cudaversion}}
     requires:
       - *Requires
-      - python_{{pyversion}}-module
-      - cuda_{{cudaversion}}-module
+      - "{{module.prereq}}"
