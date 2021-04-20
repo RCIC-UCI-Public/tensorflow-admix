@@ -1,4 +1,7 @@
 ---
+system:
+  - yum-utils
+  - java-11-openjdk-devel
 bootstrap:
   - absl-py
   - astor
@@ -25,9 +28,6 @@ bootstrap:
 build:
   - tensorflow
   - tensorflow-module
-system:
-  - yum-utils
-  - java-11-openjdk-devel
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
