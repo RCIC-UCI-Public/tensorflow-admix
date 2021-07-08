@@ -3,21 +3,28 @@
 ---
 - name: common
   versions: !include versions.yaml
-  baserpm: "tensorflow-python{{pyversion}}-{{name}}_{{version}}"
+  baserpm: "{{tname}}_{{tversion}}_python{{pyversion}}-{{name}}"
   pyversion: "{{versions.python_version}}"
   pyfamily: "{{versions.python_family}}"
   pymajor: "{{versions.python_major}}"
   cudaversion: "{{versions.cuda}}"
   vendor_source:  "{{pypiurl}}/{{name}}-{{version}}.{{extension}}"
-  root: "{{pkg_defaults.app_path}}/python/{{pyversion}}"
+  tname: tensorflow
+  tversion: "{{versions.tensorflow}}"
+#  root: "{{pkg_defaults.app_path}}/{{tname}}/{{tversion}}"
+  parent: "{{pkg_defaults.app_path}}/{{tname}}"
+  root: "{{parent}}/{{tversion}}"
+  pyroot: "{{root}}/lib/python{{pyfamily}}/site-packages"
   build:
     configure: echo No configure required
-    modules: python/{{pyversion}}
-    pkgmake:
+    modules:
+      - python/{{pyversion}}
+    pkgmake: python setup.py build
     target: 
   install:
-    makeinstall: python{{pymajor}} ./setup.py install --root=$(ROOT) 
+    makeinstall: >
+      python setup.py install --root $(ROOT) --prefix {{root}}
   requires:
     python_{{pyversion}}
-  files: 
-    - "{{root}}"
+# files: 
+#    - "{{parent}}"

@@ -1,12 +1,6 @@
-#!include rcic-package.yaml
 !include pymodule.yaml
 ---
 - package: TensorRT
-# versions: !include versions.yaml
-# pyversion: "{{versions.python_version}}"
-# pyfamily: "{{versions.python_family}}"
-# pymajor: "{{versions.python_major}}"
-# cudaversion: "{{versions.cuda}}"
   distname: TensorRT
   name: tensorRT 
   baserpm: "{{name}}_{{version}}_python{{pyversion}}"
@@ -21,25 +15,22 @@
     that allows TensorRT to optimize and run them on an NVIDIA GPU.
   src_dir: "{{distname}}-{{version}}"
   root: "{{parent}}/{{version}}"
-  pyroot: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
-  contents: bin doc include lib samples 
+#  pyroot: "{{root}}/lib/python{{pyfamily}}/site-packages"
+  contents: bin include lib samples 
+  docs: doc/pdf/*pdf TensorRT-Release-Notes.pdf  
   pysuffix: cp36-none-linux_x86_64
   addfile: 
     - filter-requires-{{name}}.sh
-# build:
-#   configure: echo configure not used 
-#   modules: python/{{pyversion}}
-#   pkgmake: 
-#   target:  
   install:
     makeinstall: >
+      mkdir -p $(ROOT){{root}}/doc;
+      cp -pR {{docs}} $(ROOT){{root}}/doc;
       for x in {{contents}}; do cp -pR $$x/ $(ROOT){{root}}; done;
       mkdir -p $(ROOT)/{{pyroot}};
       unzip -d $(ROOT)/{{pyroot}} graphsurgeon/*.whl;
       unzip -d $(ROOT)/{{pyroot}} uff/*.whl;
       unzip -d $(ROOT)/{{pyroot}} python/*{{pysuffix}}.whl;
       (cd $(ROOT)/$(pyroot); chmod -R a+r * )
-  files:
-    - "{{parent}}"
-    - "{{pyroot}}/*"
+#  files:
+#    - "{{parent}}"
   rpmFilters: *filterRequires
