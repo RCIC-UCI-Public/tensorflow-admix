@@ -15,7 +15,6 @@
     that allows TensorRT to optimize and run them on an NVIDIA GPU.
   src_dir: "{{distname}}-{{version}}"
   root: "{{parent}}/{{version}}"
-#  pyroot: "{{root}}/lib/python{{pyfamily}}/site-packages"
   contents: bin include lib samples 
   docs: doc/pdf/*pdf TensorRT-Release-Notes.pdf  
   pysuffix: cp36-none-linux_x86_64
@@ -31,6 +30,4 @@
       unzip -d $(ROOT)/{{pyroot}} uff/*.whl;
       unzip -d $(ROOT)/{{pyroot}} python/*{{pysuffix}}.whl;
       (cd $(ROOT)/$(pyroot); chmod -R a+r * )
-#  files:
-#    - "{{parent}}"
   rpmFilters: *filterRequires
