@@ -11,9 +11,8 @@
   vendor_source: "{{pypiurl}}/{{src_tarball}}"
   description: |
     Protocol Buffers are Google's data interchange format
-  root: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
   install:
     makeinstall: >
-      mkdir -p $(ROOT)/{{root}};
-      unzip -d $(ROOT)/{{root}} {{src_tarball}};
+      mkdir -p $(ROOT)/{{pyroot}};
+      unzip -d $(ROOT)/{{pyroot}} {{src_tarball}};
       (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{name}}*)

@@ -3,6 +3,7 @@
 ---
 - name: common
   versions: !include versions.yaml
+  release: "3"
   baserpm: "{{tname}}_{{tversion}}_python{{pyversion}}-{{name}}"
   pyversion: "{{versions.python_version}}"
   pyfamily: "{{versions.python_family}}"
