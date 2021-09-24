@@ -14,26 +14,26 @@
   vendor_source:
   description: |
     TensorFlow is an open source software library for high performance numerical computation
-  root: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
+  #root: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
   install:
     makeinstall: >
-      mkdir -p $(ROOT)/{{root}};
-      unzip -d $(ROOT)/{{root}} {{src_tarball}};
+      mkdir -p $(ROOT)/{{pyroot}};
+      unzip -d $(ROOT)/{{pyroot}} {{src_tarball}};
       (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{name}}*)
   requires:
     - python_{{pyversion}}
     - python_{{pyversion}}-numpy
     - python_{{pyversion}}-six
-    - tensorflow-python{{pyversion}}-absl-py_{{versions.absl_py}}
-    - tensorflow-python{{pyversion}}-astor_{{versions.astor}}
-    - tensorflow-python{{pyversion}}-backports.weakref_{{versions.backports_weakref}}
-    - tensorflow-python{{pyversion}}-gast_{{versions.gast}}
-    - tensorflow-python{{pyversion}}-google-pasta_{{versions.google_pasta}}
-    - tensorflow-python{{pyversion}}-keras-applications_{{versions.keras_applications}}
-    - tensorflow-python{{pyversion}}-keras-preprocessing_{{versions.keras_preprocessing}}
-    - tensorflow-python{{pyversion}}-opt_einsum_{{versions.opt_einsum}}
-    - tensorflow-python{{pyversion}}-protobuf_{{versions.protobuf}}
-    - tensorflow-python{{pyversion}}-tensorboard_{{versions.tensorboard}}
-    - tensorflow-python{{pyversion}}-tensorflow_estimator_{{versions.tensorflow_estimator}}
-    - tensorflow-python{{pyversion}}-termcolor_{{versions.termcolor}}
-    - tensorflow-python{{pyversion}}-wrapt_{{versions.wrapt}}
+    - tensorflow_{{version}}_python{{pyversion}}-absl-py
+    - tensorflow_{{version}}_python{{pyversion}}-astor
+    - tensorflow_{{version}}_python{{pyversion}}-backports.weakref
+    - tensorflow_{{version}}_python{{pyversion}}-gast
+    - tensorflow_{{version}}_python{{pyversion}}-google-pasta
+    - tensorflow_{{version}}_python{{pyversion}}-keras-applications
+    - tensorflow_{{version}}_python{{pyversion}}-keras-preprocessing
+    - tensorflow_{{version}}_python{{pyversion}}-opt_einsum
+    - tensorflow_{{version}}_python{{pyversion}}-protobuf
+    - tensorflow_{{version}}_python{{pyversion}}-tensorboard
+    - tensorflow_{{version}}_python{{pyversion}}-tensorflow_estimator
+    - tensorflow_{{version}}_python{{pyversion}}-termcolor
+    - tensorflow_{{version}}_python{{pyversion}}-wrapt
