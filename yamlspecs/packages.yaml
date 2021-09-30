@@ -20,7 +20,6 @@ bootstrap:
   - tensorflow_estimator
   - termcolor
   - wrapt
-  - wheel
   - tensorRT
   - tensorRT-module
   - bazel
