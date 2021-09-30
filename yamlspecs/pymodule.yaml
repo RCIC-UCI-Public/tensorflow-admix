@@ -4,10 +4,9 @@
 - name: common
   versions: !include versions.yaml
   baserpm: "{{tname}}_{{tversion}}_python{{pyversion}}-{{name}}"
-  pyversion: "{{versions.python_version}}"
-  pyfamily: "{{versions.python_family}}"
-  pymajor: "{{versions.python_major}}"
-  cudaversion: "{{versions.cuda}}"
+  pyversion: "{{versions.python3}}"
+  pyfamily: "{{versions.python3_major}}"
+  cudaversion: "{{versions.cuda.version}}"
   vendor_source:  "{{pypiurl}}/{{name}}-{{version}}.{{extension}}"
   tname: tensorflow
   tversion: "{{versions.tensorflow}}"
