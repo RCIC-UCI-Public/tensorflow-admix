@@ -2,11 +2,12 @@
 Building tensorflow. 
 
 See generic step instructions to compile from source https://www.tensorflow.org/install/source. 
-Details of specific build instrucionts is in `yamlspecs/README-build-tensorflow`
+Details of specific build instrucionts is in `yamlspecs/README-build-tensorflow*`
 
 ### Download source
 
-Download a release https://github.com/tensorflow/tensorflow/releases/tag/v2.0.0
+Download a source release https://github.com/tensorflow/tensorflow/archive/v<version>.tar.gz
+This is used with bazel build to create pytohn whl package.
 
 ### Prerequisites
 
@@ -14,57 +15,51 @@ Build/install all the prerequisites.
 
 1. **Python prerequisites**
 
-   Using the latest python 3.8.0.
+   Using the latest python PYVERSION.
    Python packages prerequisites are specified in tensorflow source
    in tensorflow-VERSION/tensorflow/tools/pip_package/setup.py
-   For tensorflow v 2.0.0: 
-   - absl-py >= 0.7.0
-   - astor >= 0.6.0
-   - backports.weakref >= 1.0rc1
-   - gast == 0.2.2
-   - google_pasta >= 0.1.8
-   - keras_applications >= 1.0.8
-   - keras_preprocessing >= 1.1.0
-   - numpy >= 1.16.0 < 2.0
-   - opt_einsum >= 2.3.2
-   - protobuf >= 3.8.0
-   - tensorboard >= 2.0.0 < 2.1.0
-   - tensorflow_estimator >= 2.0.0 < 2.1.0
-   - termcolor >= 1.1.0
-   - wrapt >= 1.11.1
-   - wheel >= 0.26
-   - six >= 1.12.0
 
-   The packages and their specific versions are listed in `packages.yaml` and `versions.yaml`
+   Also check tensorflow-VERSION/tensorflow/tools/ci_build/release/requirements_common.txt
+
+   The packages and their specific versions are listed in `packages.yaml`, `set*yaml`  and `versions*yaml`
 
    **Note:** gast 0.3+ no longer has attribute `Num`, which is required by tensroflow. The built
    tensorflow package fails on import with `AttributeError: module 'gast' has no attribute 'Num'`
-   Use older gast verison 0.2.2. 
+   Use older gast verison 0.2.2 for tensorflow 2.0.0.
 
 1. **Bazel**
 
    Install bazel from source. See https://docs.bazel.build/versions/master/install.html for details.
    Make sure to use a supported bazel version: any version between _TF_MIN_BAZEL_VERSION and 
-   _TF_MAX_BAZEL_VERSION as specified in tensorflow/configure.py. Currently supported is 0.26.1
+   _TF_MAX_BAZEL_VERSION as specified in tensorflow/configure.py. 
+   
+   When building bazel verify java version. Specific versions of bazel require specific versions of java
+   This is handled via `versions*yaml` files.
 
 1. **GPU support**  
 
    See https://www.tensorflow.org/install/gpu for details
+
    **NOTE:** most packaghes are related by verison of CUDA and cuDNN. See specific versions
    in `versions.yaml`
 
    The following NVIDIA® software must be installed:
    - CUDA® Toolkit —TensorFlow supports CUDA 10.0 
-     - NVIDIA® GPU drivers —CUDA 10.0 requires 410.x or higher.
+     - NVIDIA® GPU drivers CUDA 10.0 requires 410.x or higher.
      - CUPTI ships with the CUDA Toolkit.
    - cuDNN SDK (>= 7.4.1). Download RPMs from NVIDIA for CUDA 10, current version X=7.6.4.38-1.cuda10.1
      - libcudnn7-X
      - libcudnn7-devel-X
      - libcudnn7-doc-X
-   - Optional TensorRT to improve latency and throughput for inference on some models.
-     Download source from NVIDIA Developer, specific version for CUDA 10 and cuDNN 7.6. Compile python
-     whl files and install packaged  contents. Requires cuDNN
-     Install instructions https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing-tar
+1. TensorRT to improve latency and throughput for inference on some models.
+   Download source from NVIDIA Developer, specific versions:
+   for CUDA 10 and cuDNN 7  use 6.0 GA (Generic Availability)
+       https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/6.0/GA_6.0.1.5/tars
+   for CUDA 11 and cuDNN 8  use 8.2 GA (Generic Availability) Update 2
+       https://developer.nvidia.com/nvidia-tensorrt-8x-download
+
+   Compile python whl files and install packaged  contents. Requires cuDNN
+   Install instructions https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing-tar
 
 1. **Optional ComputeCPP**
   
@@ -87,7 +82,7 @@ Build/install all the prerequisites.
 
 ### Patch tensorflow source.
 
-The Tensorflwo v.2.0.0 had a few bugs that require fixes.
+The Tensorflow v.2.0.0 had a few bugs that require fixes.
 
 1. Bazel build fails with `cannot convert ‘std::nullptr_t’ to ‘Py_ssize_t {aka long int}’ in initialization`
    See https://github.com/tensorflow/tensorflow/issues/33543.
@@ -119,15 +114,7 @@ patch  -p0 < ../tensorflow-v.2.0.0-python.3.8.0.patch
 
 Load modules to setup environment and configure system build via the `./configure` at the root of the source tree. 
 This script prompts for the location of TensorFlow dependencies and asks for additional build configuration options.
-See yamlspecs/README-build-tensorflow for a complete set of questions.
-```bash
-module load bazel/0.26.1 
-module load cuda/10.1.243
-module load computecpp/1.1.6 
-module load tensorRT/6.0.1.5 
-module load foundation
-./configure
-```
+See yamlspecs/README-build-tensorflow-<VERSION> for a complete set of questions and commands.
 
 **NOTE:** need git that understands `-C` flag (git provided by foundation module is 2.23).
 
@@ -135,7 +122,6 @@ module load foundation
 for the machine's CPU type where the build is run. For building TensorFlow for a different CPU type, 
 need a more specific optimization flag. See the GCC manual for examples:
 https://gcc.gnu.org/onlinedocs/gcc-4.5.3/gcc/i386-and-x86_002d64-Options.html
-Option used for current build is `-march=core-avx2`
 
 After running `./configure` a configuration file `.tf_configure.bazelrc` is created in the
 current directory and it will be used by bazel build.

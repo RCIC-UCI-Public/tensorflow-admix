@@ -28,6 +28,7 @@ module load foundation
 
 # configure the build. Run configure command abd answer the questions.
 # the result is .tf_configure.bazelrc in the current directory
+# save as dot.tf_configure.bazelrc-2.0.0
 # Note .bazelrc is included in the distro
 cd tensorflow-2.0.0/
 ./configure

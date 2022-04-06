@@ -1,0 +1,140 @@
+#!/bin/bash
+
+# load modules
+module load bazel/4.2.2 
+module load tensorRT/8.2.3.0 
+module list
+Currently Loaded Modulefiles:
+ 1) bazel/4.2.2   2) python/3.10.2   3) cuda/11.4.0   4) tensorRT/8.2.3.0  
+
+#################################################
+# run configure 
+#################################################
+# /opt/apps/cuda/11.4.0,/opt/apps/tensorRT/8.2.3.0,/usr 
+
+[root@admixdev-6 tensorflow-2.8.0]# ./configure
+You have bazel 4.2.2- (@non-git) installed.
+** Please specify the location of python. [Default is /opt/apps/python/3.10.2/bin/python3]:
+Found possible Python library paths:
+  /opt/apps/python/3.10.2/lib/python3.10/site-packages
+  /opt/apps/tensorRT/8.2.3.0/lib/python3.10/site-packages
+Please input the desired Python library path to use.  Default is [/opt/apps/python/3.10.2/lib/python3.10/site-packages]
+
+** Do you wish to build TensorFlow with ROCm support? [y/N]:
+No ROCm support will be enabled for TensorFlow.
+
+** Do you wish to build TensorFlow with CUDA support? [y/N]: y
+CUDA support will be enabled for TensorFlow.
+
+** Do you wish to build TensorFlow with TensorRT support? [y/N]: y
+TensorRT support will be enabled for TensorFlow.
+Could not find any NvInferVersion.h matching version '' in any subdirectory:
+        ''
+        'include'
+        'include/cuda'
+        'include/*-linux-gnu'
+        'extras/CUPTI/include'
+        'include/cuda/CUPTI'
+        'local/cuda/extras/CUPTI/include'
+of:
+        '/export/repositories/cuda-admix/BUILD/cuda-toolkit_11.4.0-11.4.0/../..//BUILD/cudaExtract/targets/x86_64-linux/lib'
+        '/lib'
+        '/lib64'
+        '/usr'
+        '/usr/lib64//bind9-export'
+        '/usr/lib64/atlas'
+        '/usr/lib64/dyninst'
+
+Asking for detailed CUDA configuration...
+
+** Please specify the CUDA SDK version you want to use. [Leave empty to default to CUDA 10]: 11
+** Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 7]: 8
+** Please specify the TensorRT version you want to use. [Leave empty to default to TensorRT 6]: 8
+** Please specify the locally installed NCCL version you want to use. [Leave empty to use http://github.com/nvidia/nccl]:
+** Please specify the comma-separated list of base paths to look for CUDA libraries and headers. [Leave empty to use the default]: /opt/apps/cuda/11.4.0,/opt/apps/tensorRT/8.2.3.0,/usr
+
+Found CUDA 11.4 in:
+    /opt/apps/cuda/11.4.0/targets/x86_64-linux/lib
+    /opt/apps/cuda/11.4.0/targets/x86_64-linux/include
+Found cuDNN 8 in:
+    /usr/lib64
+    /usr/include
+Found TensorRT 8 in:
+    /opt/apps/tensorRT/8.2.3.0/lib
+    /opt/apps/tensorRT/8.2.3.0/include
+
+** Please specify a list of comma-separated CUDA compute capabilities you want to build with.
+You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus. Each capability can be specified as "x.y" or "compute_xy"
+to include both virtual and binary GPU code, or as "sm_xy" to only include the binary code.
+Please note that each additional compute capability significantly increases your build time and binary size,
+and that TensorFlow only supports compute capabilities >= 3.5 [Default is: 3.5,7.0]: 7.0
+
+** Do you want to use clang as CUDA compiler? [y/N]:
+nvcc will be used as CUDA compiler.
+
+** Please specify which gcc should be used by nvcc as the host compiler. [Default is /usr/bin/gcc]:
+
+** Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -Wno-sign-compare]:
+** Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]:
+Not configuring the WORKSPACE for Android builds.
+
+Preconfigured Bazel build configs. You can use any of the below by adding "--config=<>" to your build command. See .bazelrc for more details.
+	--config=mkl         	# Build with MKL support.
+	--config=mkl_aarch64 	# Build with oneDNN and Compute Library for the Arm Architecture (ACL).
+	--config=monolithic  	# Config for mostly static monolithic build.
+	--config=numa        	# Build with NUMA support.
+	--config=dynamic_kernels	# (Experimental) Build kernels into separate shared objects.
+	--config=v1          	# Build with TensorFlow 1 API instead of TF 2 API.
+Preconfigured Bazel build configs to DISABLE default on features:
+	--config=nogcp       	# Disable GCP support.
+	--config=nonccl      	# Disable NVIDIA NCCL support.
+Configuration finished
+
+# Edit resulting .tf_configure.bazelrc
+# (1) change  for better cpu optimizaton
+      from build:opt --copt=-Wno-sign-compare
+      to   build:opt --copt=-mavx2
+
+# (2) change references test:v1 and test:v2 to test: and change -no_gpu to -gpu
+      --test_tag_filters=-benchmark-test,-no_oss,-no_gpu,-oss_serial
+      --build_tag_filters=-benchmark-test,-no_oss,-no_gpu
+      --test_tag_filters=-benchmark-test,-no_oss,-no_gpu,-oss_serial,-v1only
+      --build_tag_filters=-benchmark-test,-no_oss,-no_gpu,-v1only
+
+#################################################
+# run bazel build command (takes a few hours
+#################################################
+nohup bazel build --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" --local_ram_resources=4096 --verbose_failures //tensorflow/tools/pip_package:build_pip_package > ../build-out &
+
+#################################################
+# run bazel command to build whl package
+#################################################
+./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg 
+
+Tue Apr 5 11:55:49 PDT 2022 : === Preparing sources in dir: /tmp/tmp.7SfkQuJIw2
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0 /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0/bazel-bin/tensorflow/tools/pip_package/build_pip_package.runfiles/org_tensorflow /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0
+/tmp/tmp.7SfkQuJIw2/tensorflow/include /export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0
+/export/repositories/tensorflow-admix/yamlspecs/tensorflow-2.8.0
+Tue Apr 5 11:56:22 PDT 2022 : === Building wheel
+listing git files failed - pretending there aren\'t any
+warning: no files found matching 'README'
+warning: no files found matching '*.pyd' under directory '*'
+warning: no files found matching '*.pyi' under directory '*'
+warning: no files found matching '*.pd' under directory '*'
+warning: no files found matching '*.dylib' under directory '*'
+warning: no files found matching '*.dll' under directory '*'
+warning: no files found matching '*.lib' under directory '*'
+warning: no files found matching '*.csv' under directory '*'
+warning: no files found matching '*.h' under directory 'tensorflow/include/tensorflow'
+warning: no files found matching '*.proto' under directory 'tensorflow/include/tensorflow'
+warning: no files found matching '*' under directory 'tensorflow/include/third_party'
+Tue Apr 5 11:57:23 PDT 2022 : === Output wheel file is in: /tmp/tensorflow_pkg
+
+###############################################
+# copy resulting whl file
+###############################################
+cp /tmp/tensorflow_pkg/tensorflow-2.8.0-cp310-cp310-linux_x86_64.whl ../../sources/
+
