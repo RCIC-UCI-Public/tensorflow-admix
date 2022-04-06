@@ -6,32 +6,38 @@
   version: "{{versions.tensorflow}}"
   no_src_dir: True
   extension: whl
-  suffix: cp38-cp38-linux_x86_64
+  suffix: "{{versions.tensorflow_suffix}}"
   src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
-  # source distro was used for building the whl package
-  giturl: https://github.com/tensorflow/tensorflow/archive/v2.0.0.tar.gz
+  # source distro was used for building the whl package, See ../README for details
   # built whl package is on google drive, leave below empty to prevent overwriting
   vendor_source: ""
   description: |
     TensorFlow is an open source software library for high performance numerical computation
-  #root: "{{pkg_defaults.app_path}}/python/{{pyversion}}/lib/python{{pyfamily}}/site-packages"
   install:
-    makeinstall: >
-      mkdir -p $(ROOT)/{{pyroot}};
-      unzip -d $(ROOT)/{{pyroot}} {{src_tarball}};
-      (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{name}}*)
+    makeinstall: "{{install_pip}}"
+  req200: 
+    - tensorflow_{{version}}_python{{pyversion}}-astor
+    - tensorflow_{{version}}_python{{pyversion}}-backports.weakref
+    - tensorflow_{{version}}_python{{pyversion}}-keras-applications
+    - tensorflow_{{version}}_python{{pyversion}}-keras
+    - tensorflow_{{version}}_python{{pyversion}}-markdown
+    - tensorflow_{{version}}_python{{pyversion}}-werkzeug
+  req280: 
+    - tensorflow_{{version}}_python{{pyversion}}-astunparse
+    - tensorflow_{{version}}_python{{pyversion}}-flatbuffers
+    - tensorflow_{{version}}_python{{pyversion}}-libclang
   requires:
     - python_{{pyversion}}
     - python_{{pyversion}}-numpy
     - python_{{pyversion}}-six
+    - python_{{pyversion}}-wheel
+    - !ifeq "{{version}},2.0.0,{{req200}},{{req280}}"
     - tensorflow_{{version}}_python{{pyversion}}-absl-py
-    - tensorflow_{{version}}_python{{pyversion}}-astor
-    - tensorflow_{{version}}_python{{pyversion}}-backports.weakref
     - tensorflow_{{version}}_python{{pyversion}}-gast
     - tensorflow_{{version}}_python{{pyversion}}-google-pasta
-    - tensorflow_{{version}}_python{{pyversion}}-keras-applications
     - tensorflow_{{version}}_python{{pyversion}}-keras-preprocessing
     - tensorflow_{{version}}_python{{pyversion}}-opt_einsum
+    - tensorflow_{{version}}_python{{pyversion}}-grpcio
     - tensorflow_{{version}}_python{{pyversion}}-protobuf
     - tensorflow_{{version}}_python{{pyversion}}-tensorboard
     - tensorflow_{{version}}_python{{pyversion}}-tensorflow_estimator

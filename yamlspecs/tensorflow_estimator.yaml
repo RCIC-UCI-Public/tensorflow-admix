@@ -5,13 +5,11 @@
   version: "{{versions.tensorflow_estimator}}"
   suffix: py2.py3-none-any
   extension: whl
+  no_src_dir: True
   src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
-  pypiurl: https://files.pythonhosted.org/packages/a4/f5/926ae53d6a226ec0fda5208e0e581cffed895ccc89e36ba76a8e60895b78
+  pypiurl: https://files.pythonhosted.org/packages/{{versions.tensorflow_estimator_hash}}
   vendor_source:  "{{pypiurl}}/{{src_tarball}}"
   description: |
     TensorFlow Estimator is a high-level API that encapsulates model training, evaluation, prediction, and exporting
   install:
-    makeinstall: >
-      mkdir -p $(ROOT)/{{pyroot}};
-      unzip -d $(ROOT)/{{pyroot}} {{src_tarball}};
-      (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{name}}*)
+    makeinstall: "{{install_pip}}"

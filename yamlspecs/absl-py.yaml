@@ -3,9 +3,10 @@
 - package: absl-py
   name: absl-py
   version: "{{versions.absl_py}}"
-  vendor_source: https://github.com/abseil/abseil-py/archive/pypi-v{{version}}.{{extension}}
-  src_dir: abseil-py-pypi-v{{version}}
+  prefix: "{{versions.absl_py_prefix}}"
+  vendor_source: https://github.com/abseil/abseil-py/archive/refs/tags/{{prefix}}v{{version}}.{{extension}}
+  suffix: !ifeq "{{prefix}},pypi-,pypi-v,"
+  src_dir: abseil-py-{{suffix}}{{version}}
   description: |
     Abseil Python Common Libraries, a collection of Python library code for building Python applications. This
     code is collected from Google's own Python code base, and has been extensively tested and used in production
-

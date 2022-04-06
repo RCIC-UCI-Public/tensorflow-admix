@@ -3,13 +3,22 @@
 - package: keras 
   name: keras
   version: "{{versions.keras}}"
-  vendor_source: https://github.com/keras-team/keras/archive/{{version}}.{{extension}}
+  extension: "{{versions.keras_extension}}"
+  type: "{{versions.keras_build}}"
+  src_tarball: "{{name}}-{{version}}{{extension}}"
+  pypiurl: https://files.pythonhosted.org/packages/{{versions.keras_hash}}/{{src_tarball}}
+  giturl: https://github.com/keras-team/keras/archive/{{version}}{{extension}}
+  vendor_source: !ifeq "{{type}},setup,{{giturl}},{{pypiurl}}"
   description: |
     Keras is a high-level neural networks API, written in Python and capable of running on
     top of TensorFlow, CNTK, or Theano.  Use Keras if you need a deep learning library that 
       - allows for easy and fast prototyping (through user friendliness, modularity, and extensibility)
       - supports both convolutional networks and recurrent networks, as well as their combinations 
       - runs seamlessly on CPU and GPU
+  build:
+    pkgmake: echo 'Build performed in install'
+  install:
+    makeinstall: !ifeq "{{type}},setup,{{install_setup}},{{install_pip}}"
   requires:
     - python_{{pyversion}}
     - python_{{pyversion}}-pyyaml

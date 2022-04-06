@@ -5,13 +5,11 @@
   version: "{{versions.tensorboard}}"
   suffix: py3-none-any
   extension: whl
+  no_src_dir: True
   src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
-  pypiurl: https://files.pythonhosted.org/packages/1d/fd/4f3ca1516cbb3713259ef229abd9314bba0077ef6070285dde0dd1ed21b2
+  pypiurl: https://files.pythonhosted.org/packages/{{versions.tensorboard_hash}}
   vendor_source:  "{{pypiurl}}/{{src_tarball}}"
   description: |
     TensorBoard is a suite of web applications for inspecting and understanding your TensorFlow runs and graphs
   install:
-    makeinstall: >
-      mkdir -p $(ROOT)/{{pyroot}};
-      unzip -d $(ROOT)/{{pyroot}} {{src_tarball}};
-      (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{name}}*)
+    makeinstall: "{{install_pip}}"

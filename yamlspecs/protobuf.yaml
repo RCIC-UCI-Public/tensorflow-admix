@@ -5,14 +5,10 @@
   version: "{{versions.protobuf}}"
   no_src_dir: True
   extension: whl
-  suffix: cp38-cp38-manylinux_x86_64
-  src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
-  pypiurl: https://files.pythonhosted.org/packages/be/b9/eb65881d9c5e8361ac0476ca18a0d1346d1aa2a088e987dc0541ac4385f6
+  src_tarball: "{{name}}-{{version}}-{{versions.protobuf_suffix}}.{{extension}}"
+  pypiurl: https://files.pythonhosted.org/packages/{{versions.protobuf_hash}}
   vendor_source: "{{pypiurl}}/{{src_tarball}}"
   description: |
     Protocol Buffers are Google's data interchange format
   install:
-    makeinstall: >
-      mkdir -p $(ROOT)/{{pyroot}};
-      unzip -d $(ROOT)/{{pyroot}} {{src_tarball}};
-      (cd $(ROOT)/$(PKGROOT); chmod -R a+r {{name}}*)
+    makeinstall: "{{install_pip}}"

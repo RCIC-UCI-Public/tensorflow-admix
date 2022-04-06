@@ -5,20 +5,20 @@
   name: tensorRT 
   baserpm: "{{name}}_{{version}}_python{{pyversion}}"
   version: "{{versions.tensorRT}}"
-  suffix: CentOS-7.6.x86_64-gnu.cuda-10.1.cudnn7.6
-  nvidiaurl: https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/6.0/GA_{{version}}/tars
+  suffix: "{{versions.tensorRT_build}}"
+  nvidiaurl: https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/rest-of-link
   src_tarball: "{{distname}}-{{version}}.{{suffix}}.{{extension}}"
   vendor_source: "{{nvidiaurl}}/{{src_tarball}}"
+  parent: "{{pkg_defaults.app_path}}/{{name}}"
   description: |
-    TensorRT provides API's via C++ and Python that help to express deep learning 
+    TensorRT {{version}} provides API's via C++ and Python that help to express deep learning 
     models via the Network Definition API or load a pre-defined model via the parsers 
     that allows TensorRT to optimize and run them on an NVIDIA GPU.
   src_dir: "{{distname}}-{{version}}"
   root: "{{parent}}/{{version}}"
-#  pyroot: "{{root}}/lib/python{{pyfamily}}/site-packages"
   contents: bin include lib samples 
-  docs: doc/pdf/*pdf TensorRT-Release-Notes.pdf  
-  pysuffix: cp36-none-linux_x86_64
+  docs: doc/pdf/*pdf  doc/*txt TensorRT-Release-Notes.pdf
+  pysuffix: "{{versions.tensorRT_py}}-none-linux_x86_64"
   addfile: 
     - filter-requires-{{name}}.sh
   install:
@@ -28,9 +28,8 @@
       for x in {{contents}}; do cp -pR $$x/ $(ROOT){{root}}; done;
       mkdir -p $(ROOT)/{{pyroot}};
       unzip -d $(ROOT)/{{pyroot}} graphsurgeon/*.whl;
+      unzip -d $(ROOT)/{{pyroot}} o*graphsurgeon/*.whl;
       unzip -d $(ROOT)/{{pyroot}} uff/*.whl;
       unzip -d $(ROOT)/{{pyroot}} python/*{{pysuffix}}.whl;
       (cd $(ROOT)/$(pyroot); chmod -R a+r * )
-#  files:
-#    - "{{parent}}"
   rpmFilters: *filterRequires
