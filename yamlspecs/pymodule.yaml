@@ -12,10 +12,11 @@
   vendor_source:  "{{pypiurl}}/{{name}}-{{version}}.{{extension}}"
   tname: tensorflow
   tversion: "{{versions.tensorflow}}"
-#  root: "{{pkg_defaults.app_path}}/{{tname}}/{{tversion}}"
   parent: "{{pkg_defaults.app_path}}/{{tname}}"
   root: "{{parent}}/{{tversion}}"
   pyroot: "{{root}}/lib/python{{pyfamily}}/site-packages"
+  install_pip: pip install --root $(ROOT) --prefix {{root}}  --no-deps {{src_tarball}}
+  install_setup: python setup.py install --root $(ROOT) --prefix {{root}}
   build:
     configure: echo No configure required
     modules:
@@ -23,9 +24,6 @@
     pkgmake: python setup.py build
     target: 
   install:
-    makeinstall: >
-      python setup.py install --root $(ROOT) --prefix {{root}}
+    makeinstall: "{{install_setup}}"
   requires:
     python_{{pyversion}}
-# files: 
-#    - "{{parent}}"
