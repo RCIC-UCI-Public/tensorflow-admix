@@ -1,0 +1,15 @@
+!include pymodule.yaml
+---
+- package: libclang 
+  name: libclang
+  version: "{{versions.libclang}}"
+  suffix: py2.py3-none-manylinux1_x86_64
+  extension: whl
+  no_src_dir: True
+  src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
+  pypiurl: https://files.pythonhosted.org/packages/{{versions.libclang_hash}}
+  vendor_source:  "{{pypiurl}}/{{src_tarball}}"
+  description: |
+    Clang Python Bindings, mirrored from the official LLVM repo for LLVM version {{version}}
+  install:
+    makeinstall:  "{{install_pip}}"

@@ -1,0 +1,21 @@
+!include pymodule.yaml
+---
+- package: flatbuffers
+  name: flatbuffers
+  version: "{{versions.flatbuffers}}"
+  vendor_source: https://github.com/google/flatbuffers/archive/refs/tags/v{{version}}.{{extension}}
+  description: |
+     The FlatBuffers {{version}} serialization format for Python
+#    Flatbuffers {{version}} is a cross platform serialization library architected
+#    for maximum memory efficiency. It allows you to directly access serialized
+#    data without parsing/unpacking it first, while still having great
+#    forwards/backwards compatibility
+  build:
+    pkgmake: cd python; python setup.py build
+  install:
+    makeinstall: >
+      cd python; python setup.py install --root $(ROOT) --prefix {{root}}
+
+#    cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+#    make
+#    make install PREFIX=/tmp/MY
