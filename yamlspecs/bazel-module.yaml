@@ -8,3 +8,4 @@
   module:
     prepend_path:
       - PATH {{root}}/bin
+    prereq:

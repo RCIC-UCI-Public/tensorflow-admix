@@ -17,12 +17,13 @@
     configure: echo configure not used 
     pkgmake: mkdir {{bdir}}; cd {{bdir}}; unzip $(REDHAT.ROOT)/sources/{{src_tarball}}; env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
     modules:  
+      - !ifeq "{{version}},4.2.2,java/{{versions.java}},"
     target:  
   install:
     makeinstall: >
       mkdir -p $(ROOT)/{{root}}/bin;
       mkdir -p $(ROOT)/{{root}}/etc;
-      echo '{{build.pkgmake}}' > $(ROOT){{root}}/etc/{{name}}.sh;
+      echo '{{build.pkgmake}}' > $(ROOT){{root}}/etc/readme-{{name}}-build.txt;
       $(INSTALL) -m755 {{bdir}}/output/bazel $(ROOT){{root}}/bin/
   rpm:
     extras: *RpmNone
