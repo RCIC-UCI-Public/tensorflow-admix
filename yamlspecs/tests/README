@@ -2,7 +2,7 @@ The files in this directory are for testing installed RPMs
 for compied tensorflow. 
 
 To run any file do:
-    module load pytohn/3.8.0
+    module load python/<version>
     python FILENAME
 
 Note 1: classify-image.py depends on _tkinter and needs DISPLAY set
@@ -11,5 +11,5 @@ Host must have xorg-x11-xauth RPM installed.
 
 Note 2: for classify-images.py, in non-interactive mode, displays all 
 figures and block until the figures have been closed.  This is a default 
-matplotlib.pyplot.show() behavior. IF voerwrite is as show(block=False)
+matplotlib.pyplot.show() behavior. If overwrite is as show(block=False)
 the blocking stops but the images flash and close. 
