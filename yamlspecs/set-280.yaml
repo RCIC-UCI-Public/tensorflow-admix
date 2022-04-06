@@ -1,0 +1,7 @@
+!include packages.yaml
+---
+versions: versions-280.yaml
+py_specific:
+  - astunparse
+  - flatbuffers
+  - libclang

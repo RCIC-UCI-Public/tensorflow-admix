@@ -2,32 +2,39 @@
 system:
   - yum-utils
   - java-11-openjdk-devel
-bootstrap:
-  - absl-py
+py_specific:
   - astor
   - backports-weakref
+  - keras_applications
+  - markdown
+  - werkzeug
+py_common:
+  - absl-py
   - gast
   - google-pasta
-  - keras_applications
   - keras_preprocessing
   - keras
   - opt_einsum
   - grpcio
-  - markdown
   - protobuf
-  - werkzeug
   - tensorboard
   - tensorflow_estimator
   - termcolor
   - wrapt
-  - wheel
+non_py:
   - tensorRT
   - tensorRT-module
   - bazel
   - bazel-module
+bootstrap:
+  - "{{py_specific}}"
+  - "{{py_common}}"
+  - "{{non_py}}"
 build:
   - tensorflow
   - tensorflow-module
 manifest:
   - "{{bootstrap}}"
   - "{{build}}"
+sets:
+  - "280"
