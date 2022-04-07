@@ -153,3 +153,42 @@ Copy the resulting `.whl` file to `tensorflow-admix/sources/`
 ### Install the package
 
 Use `yamlspecs/tensorflow.yaml` to generate RPM from the `.whl` file.
+
+## Keras
+
+A new version (2.8.0) install from source fails hence using whl file. 
+To build from source need bazel AND already built tensorflow.  Tried commands:
+
+```bash
+cd keras-2.8.0
+module load  bazel/VERSION
+module load tensorflow/2.8.0
+bazel build //keras/tools/pip_package:build_pip_package
+# next command would be 
+# ./bazel-bin/keras/tools/pip_package/build_pip_package /tmp/keras_pkg
+```
+Failed with
+
+``` txt
+[178 / 187] Compiling src/google/protobuf/descriptor.cc [for host]; 9s local ... (7 actions running)
+ERROR: /export/repositories/tensorflow-admix/yamlspecs/keras-2.8.0/keras/api/BUILD:143:19: Executing genrule //keras/api:keras_python_api_gen failed: (Exit 1): bash failed: error executing command /bin/bash -c ... (remaining 1 argument(s) ski
+pped)
+Traceback (most recent call last):
+  File "/root/.cache/bazel/_bazel_root/6473a4b21803cec7d4edad8916105edd/execroot/org_keras/bazel-out/k8-opt-exec-2B5CBBC6/bin/keras/api/create_keras_api_1_keras_python_api_gen.runfiles/org_keras/keras/api/create_python_api_wrapper.py", line 2
+6, in <module>
+    import keras  # pylint: disable=unused-import
+  File "/root/.cache/bazel/_bazel_root/6473a4b21803cec7d4edad8916105edd/execroot/org_keras/bazel-out/k8-opt-exec-2B5CBBC6/bin/keras/api/create_keras_api_1_keras_python_api_gen.runfiles/org_keras/keras/__init__.py", line 21, in <module>
+    from tensorflow.python import tf2
+ModuleNotFoundError: No module named 'tensorflow'
+Target //keras/tools/pip_package:build_pip_package failed to build
+Use --verbose_failures to see the command lines of failed build steps.
+ERROR: /export/repositories/tensorflow-admix/yamlspecs/keras-2.8.0/keras/tools/pip_package/BUILD:37:10 Middleman _middlemen/keras_Stools_Spip_Upackage_Sbuild_Upip_Upackage-runfiles failed: (Exit 1): bash failed: error executing command /bin/b
+ash -c ... (remaining 1 argument(s) skipped)
+INFO: Elapsed time: 59.379s, Critical Path: 13.59s
+INFO: 231 processes: 20 internal, 211 local.
+FAILED: Build did NOT complete successfully
+FAILED: Build did NOT complete successfully
+```
+On a command line per loaded modules can start python and do import `from tensorflow.python import tf2`
+
+
