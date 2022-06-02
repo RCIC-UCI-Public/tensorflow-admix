@@ -5,3 +5,8 @@ py_specific:
   - astunparse
   - flatbuffers
   - libclang
+non_py:
+  - tensorRT
+  - tensorRT-module
+  - bazel
+  - bazel-module

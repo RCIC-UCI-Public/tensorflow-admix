@@ -22,8 +22,6 @@ py_common:
   - termcolor
   - wrapt
 non_py:
-  - tensorRT
-  - tensorRT-module
   - bazel
   - bazel-module
 bootstrap:
