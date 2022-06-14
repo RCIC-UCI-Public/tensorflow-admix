@@ -1,4 +1,3 @@
-# Builds the module for tensorflow
 !include tensorflow.yaml
 !include rcic-module.yaml
 ---
@@ -9,8 +8,5 @@
       - PYTHONPATH {{pyroot}} 
     setenv: ""
     prereq:
-      - python/{{pyversion}}
+      - "{{build.modules}}"
       - cuda/{{cudaversion}}
-    requires:
-      - *Requires
-      - "{{module.prereq}}"

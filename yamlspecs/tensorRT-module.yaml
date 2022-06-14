@@ -1,4 +1,3 @@
-# Builds the module for tensorRT.
 !include tensorRT.yaml
 !include rcic-module.yaml
 ---
@@ -10,8 +9,5 @@
       - LD_LIBRARY_PATH {{root}}/{{module.lib}}
       - PYTHONPATH {{pyroot}}
     prereq: 
-      - "python/{{pyversion}}"
+      - "{{build.modules}}"
       - "cuda/{{cudaversion}}"
-    requires:
-      - *Requires
-      - "{{module.prereq}}"

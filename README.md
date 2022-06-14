@@ -191,4 +191,3 @@ FAILED: Build did NOT complete successfully
 ```
 On a command line per loaded modules can start python and do import `from tensorflow.python import tf2`
 
-

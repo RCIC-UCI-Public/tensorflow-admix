@@ -10,7 +10,7 @@
   src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
   # source distro was used for building the whl package, See ../README for details
   # built whl package is on google drive, leave below empty to prevent overwriting
-  vendor_source: ""
+  vendor_source:
   description: |
     TensorFlow is an open source software library for high performance numerical computation
   install:

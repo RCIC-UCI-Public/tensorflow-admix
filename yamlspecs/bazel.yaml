@@ -14,7 +14,6 @@
   no_src_dir: True
   bdir: compile-bazel
   build:
-    configure: echo configure not used 
     pkgmake: mkdir {{bdir}}; cd {{bdir}}; unzip $(REDHAT.ROOT)/sources/{{src_tarball}}; env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
     modules:  
       - !ifeq "{{version}},4.2.2,java/{{versions.java}},"
