@@ -52,11 +52,15 @@ Build/install all the prerequisites.
      - libcudnn7-devel-X
      - libcudnn7-doc-X
 1. TensorRT to improve latency and throughput for inference on some models.
-   Download source from NVIDIA Developer, specific versions:
+   Download source from NVIDIA Developer (have to login), specific versions:
    for CUDA 10 and cuDNN 7  use 6.0 GA (Generic Availability)
        https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/6.0/GA_6.0.1.5/tars
-   for CUDA 11 and cuDNN 8  use 8.2 GA (Generic Availability) Update 2
+   for CUDA 11.4 and cuDNN 8  use 8.2 GA (Generic Availability) Update 2
        https://developer.nvidia.com/nvidia-tensorrt-8x-download
+   for CUDA 11.7 and cudNN 8 use 8.4 GA (Generic Availability) Update 1 
+       https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/8.4.2/tars/tensorrt-8.4.2.4.linux.x86_64-gnu.cuda-11.6.cudnn8.4.tar.gz
+       While the file name has cuda11.6 the web page claims it works with cuda 11.7
+       See https://developer.nvidia.com/nvidia-tensorrt-8x-download
 
    Compile python whl files and install packaged  contents. Requires cuDNN
    Install instructions https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing-tar

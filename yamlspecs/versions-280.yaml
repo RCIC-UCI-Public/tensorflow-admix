@@ -10,8 +10,12 @@ hdf5: "1.13.1"
 tensorflow: "2.8.0"
 tensorflow_suffix: "cp310-cp310-linux_x86_64"
 bazel: "4.2.2"
-tensorRT: "8.2.3.0"
-tensorRT_build: "Linux.x86_64-gnu.cuda-11.4.cudnn8.2"
+# this is for cuda 11.4
+#tensorRT: "8.2.3.0"
+#tensorRT_build: "Linux.x86_64-gnu.cuda-11.4.cudnn8.2"
+# this is for cuda 11.7
+tensorRT: "8.4.2.4"
+tensorRT_build: "Linux.x86_64-gnu.cuda-11.6.cudnn8.4"
 tensorRT_py: "cp39"
 ### python prereqs
 absl_py: "1.0.0"
