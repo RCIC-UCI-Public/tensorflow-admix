@@ -33,3 +33,4 @@
       unzip -d $(ROOT)/{{pyroot}} python/*{{pysuffix}}.whl;
       (cd $(ROOT)/$(pyroot); chmod -R a+r * )
   rpmFilters: *filterRequires
+  rpmBuildIdLinks: none
