@@ -3,6 +3,7 @@
 ---
 - package: tensorflow module
   category: AI-LEARNING
+  release: 4
   module:
     prepend_path:
       - PYTHONPATH {{pyroot}} 
