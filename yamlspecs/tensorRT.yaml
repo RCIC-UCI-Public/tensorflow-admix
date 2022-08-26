@@ -3,6 +3,7 @@
 - package: TensorRT
   distname: TensorRT
   name: tensorRT 
+  release: 4
   baserpm: "{{name}}_{{version}}_python{{pyversion}}"
   version: "{{versions.tensorRT}}"
   suffix: "{{versions.tensorRT_build}}"

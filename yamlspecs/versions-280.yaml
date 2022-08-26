@@ -16,7 +16,7 @@ bazel: "4.2.2"
 # this is for cuda 11.7
 tensorRT: "8.4.2.4"
 tensorRT_build: "Linux.x86_64-gnu.cuda-11.6.cudnn8.4"
-tensorRT_py: "cp39"
+tensorRT_py: "cp310"
 ### python prereqs
 absl_py: "1.0.0"
 absl_py_prefix:
