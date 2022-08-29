@@ -41,3 +41,5 @@ tensorboard_hash: "f7/fd/67c61276de025801cfa8a1b9af2d7c577e7f27c17b6bff2baca20bf
 tensorflow_estimator: "2.8.0"
 tensorflow_estimator_hash: "4e/42/cefc351e0e428ca9c460bfbd994ec9f01e5d8bd34f88c65a7ea807ecd67a"
 wrapt: "1.14.0"
+pycuda: "2022.1"
+pycuda_hash: "2d/1f/48a3a5b2c715345e7af1e09361100bd98c3d72b4025371692ab233f523d3"

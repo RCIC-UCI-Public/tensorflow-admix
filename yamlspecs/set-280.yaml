@@ -10,3 +10,7 @@ non_py:
   - tensorRT-module
   - bazel
   - bazel-module
+build:
+  - tensorflow
+  - tensorflow-module
+  - pycuda
