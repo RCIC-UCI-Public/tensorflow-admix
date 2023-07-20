@@ -33,3 +33,5 @@ tensorflow_estimator_hash: "95/00/5e6cdf86190a70d7382d320b2b04e4ff0f8191a37d90a4
 termcolor: "1.1.0"
 werkzeug: "1.0.1"
 wrapt: "1.12.1"
+#pycuda: "2022.1"
+#pycuda_hash: "2d/1f/48a3a5b2c715345e7af1e09361100bd98c3d72b4025371692ab233f523d3"

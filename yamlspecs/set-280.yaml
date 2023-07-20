@@ -13,4 +13,3 @@ non_py:
 build:
   - tensorflow
   - tensorflow-module
-  - pycuda
