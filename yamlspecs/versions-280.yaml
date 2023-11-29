@@ -10,6 +10,7 @@ hdf5: "1.13.1"
 tensorflow: "2.8.0"
 tensorflow_suffix: "cp310-cp310-linux_x86_64"
 bazel: "4.2.2"
+bazel_java: java
 # this is for cuda 11.4
 #tensorRT: "8.2.3.0"
 #tensorRT_build: "Linux.x86_64-gnu.cuda-11.4.cudnn8.2"

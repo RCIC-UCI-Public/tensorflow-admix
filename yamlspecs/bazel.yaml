@@ -16,7 +16,7 @@
   build:
     pkgmake: mkdir {{bdir}}; cd {{bdir}}; unzip $(REDHAT.ROOT)/sources/{{src_tarball}}; env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
     modules:  
-      - !ifeq "{{version}},4.2.2,java/{{versions.java}},"
+      - !ifeq "{{versions.bazel_java}},java,java/{{versions.java}},"
     target:  
   install:
     makeinstall: >

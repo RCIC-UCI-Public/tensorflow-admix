@@ -1,6 +1,7 @@
 !include site.yaml
 ---
 bazel: "0.26.1"
+bazel_java:
 tensorRT: "6.0.1.5"
 tensorRT_build: "CentOS-7.6.x86_64-gnu.cuda-10.1.cudnn7.6"
 tensorRT_py: "cp36"
