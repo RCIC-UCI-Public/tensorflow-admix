@@ -7,7 +7,7 @@ Details of specific build instrucionts is in `yamlspecs/README-build-tensorflow*
 ### Download source
 
 Download a source release https://github.com/tensorflow/tensorflow/archive/v<version>.tar.gz
-This is used with bazel build to create pytohn whl package.
+This is used with bazel build to create python whl package.
 
 ### Prerequisites
 
