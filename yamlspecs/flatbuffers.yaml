@@ -7,7 +7,12 @@
   description: |
      The FlatBuffers {{version}} serialization format for Python
   build:
-    pkgmake: cd python; python setup.py build
+    pkgmake: cd python; sed -i 's/license_files/license_file/' setup.py; python setup.py build
   install:
     makeinstall: >
       cd python; python setup.py install --root $(ROOT) --prefix {{root}}
+
+# Note, for set 2130 need to edit license_files variable in setup.py
+# otherwise build fails. The the new license_files metadata works only for wheels - not sdists
+# and the build fails with error while in fact there is no error in copying files.
+# Setuptools (used in setup.py) only defines license_file
