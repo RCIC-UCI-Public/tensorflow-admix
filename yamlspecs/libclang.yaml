@@ -13,3 +13,4 @@
     Clang Python Bindings, mirrored from the official LLVM repo for LLVM version {{version}}
   install:
     makeinstall:  "{{install_pip}}"
+  rpmBuildIdLinks: none
