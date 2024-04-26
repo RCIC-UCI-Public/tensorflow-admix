@@ -1,0 +1,162 @@
+#######################################
+# load modules
+#######################################
+module load bazel/6.1.0 
+module load tensorRT/8.6.1.6 
+module load clang/16.0.1 
+module load java/11
+
+module list
+Currently Loaded Modulefiles:
+ 1) bazel/6.1.0   2) cuda/12.2.0   3) python/3.10.2   4) tensorRT/8.6.1.6   5) gcc/11.2.0   6) llvm/16.0.1   7) clang/16.0.1   8) java/11  
+
+#######################################
+# untar distro 
+#######################################
+tar xzf ../sources/tensorflow-2.15.0.tar.gz 
+cd tensorflow-2.15.0/
+
+#######################################
+# Run configure and save output below
+#######################################
+./configure
+You have bazel 6.1.0- (@non-git) installed.
+Please specify the location of python. [Default is /opt/apps/python/3.10.2/bin/python3]: 
+
+Found possible Python library paths:
+  /opt/apps/python/3.10.2/lib/python3.10/site-packages
+  /opt/apps/tensorRT/8.6.1.6/lib/python3.10/site-packages
+Please input the desired Python library path to use.  Default is [/opt/apps/python/3.10.2/lib/python3.10/site-packages]
+
+Do you wish to build TensorFlow with ROCm support? [y/N]: N
+No ROCm support will be enabled for TensorFlow.
+Do you wish to build TensorFlow with CUDA support? [y/N]: y
+CUDA support will be enabled for TensorFlow.
+Do you wish to build TensorFlow with TensorRT support? [y/N]: y
+TensorRT support will be enabled for TensorFlow.
+
+Could not find any NvInferVersion.h matching version '' in any subdirectory:
+        ''
+        'include'
+        'include/cuda'
+        'include/*-linux-gnu'
+        'extras/CUPTI/include'
+        'include/cuda/CUPTI'
+        'local/cuda/extras/CUPTI/include'
+        'targets/x86_64-linux/include'
+of:
+        '/export/repositories/cuda-admix/BUILD/cuda-toolkit_11.4.0-11.4.0/../..//BUILD/cudaExtract/targets/x86_64-linux/lib'
+        '/lib'
+        '/lib64'
+        '/usr'
+        '/usr/lib64/atlas'
+        '/usr/lib64/dyninst'
+        '/usr/local/cuda'
+
+Asking for detailed CUDA configuration...
+
+Please specify the CUDA SDK version you want to use. [Leave empty to default to CUDA 11]: 12
+Please specify the cuDNN version you want to use. [Leave empty to default to cuDNN 2]: 8
+Please specify the TensorRT version you want to use. [Leave empty to default to TensorRT 6]: 8
+Please specify the locally installed NCCL version you want to use. [Leave empty to use http://github.com/nvidia/nccl]: 
+Please specify the comma-separated list of base paths to look for CUDA libraries and headers. [Leave empty to use the default]: /opt/apps/cuda/12.2.0,/opt/apps/tensorRT/8.6.1.6,/usr
+
+Found CUDA 12.2 in:
+    /opt/apps/cuda/12.2.0/targets/x86_64-linux/lib
+    /opt/apps/cuda/12.2.0/targets/x86_64-linux/include
+Found cuDNN 8 in:
+    /usr/lib64
+    /usr/include
+Found TensorRT 8.6.1 in:
+    /opt/apps/tensorRT/8.6.1.6/lib
+    /opt/apps/tensorRT/8.6.1.6/include
+
+Please specify a list of comma-separated CUDA compute capabilities you want to build with.
+You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus. Each capability can be specified as "x.y" or "compute_xy" to include both virtual and binary GPU code, or as "sm_xy" to only include the binary code.
+Please note that each additional compute capability significantly increases your build time and binary size, and that TensorFlow only supports compute capabilities >= 3.5 [Default is: 3.5,7.0]: 7.0,8.0
+
+Do you want to use clang as CUDA compiler? [Y/n]: n
+nvcc will be used as CUDA compiler.
+Please specify which gcc should be used by nvcc as the host compiler. [Default is /opt/apps/gcc/11.2.0/bin/gcc]: 
+Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -Wno-sign-compare]: -mavx2
+Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]: 
+Not configuring the WORKSPACE for Android builds.
+
+Preconfigured Bazel build configs. You can use any of the below by adding "--config=<>" to your build command. See .bazelrc for more details.
+	--config=mkl         	# Build with MKL support.
+	--config=mkl_aarch64 	# Build with oneDNN and Compute Library for the Arm Architecture (ACL).
+	--config=monolithic  	# Config for mostly static monolithic build.
+	--config=numa        	# Build with NUMA support.
+	--config=dynamic_kernels	# (Experimental) Build kernels into separate shared objects.
+	--config=v1          	# Build with TensorFlow 1 API instead of TF 2 API.
+Preconfigured Bazel build configs to DISABLE default on features:
+	--config=nogcp       	# Disable GCP support.
+	--config=nonccl      	# Disable NVIDIA NCCL support.
+Configuration finished
+
+
+#######################################
+# Edit resulting .tf_configure.bazelrc
+#######################################
+change references  -no_gpu to -gpu in test: lines
+
+#######################################
+# run bazel build command 
+#######################################
+
+module load bazel/6.1.0 
+module load tensorRT/8.6.1.6 
+module load java/11
+module load clang/16.0.1
+module list
+Currently Loaded Modulefiles:
+without clang  1) bazel/6.1.0   2) cuda/12.2.0   3) python/3.10.2   4) tensorRT/8.6.1.6   5) java/11   6) gcc/11.2.0  
+ 1) bazel/6.1.0   2) cuda/12.2.0   3) python/3.10.2   4) tensorRT/8.6.1.6   5) java/11   6) gcc/11.2.0   7) llvm/16.0.1   8) clang/16.0.1  
+
+nohup bazel build --config=opt --jobs=8 --verbose_failures --verbose_explanations --explain=/tmp/explain //tensorflow/tools/pip_package:build_pip_package > ../build-out & 
+
+nohup bazel build \
+    --config=opt \
+    --config=cuda  \
+    --jobs=8 \
+    --verbose_failures --verbose_explanations --explain=/tmp/explain \
+    //tensorflow/tools/pip_package:build_pip_package > ../build-out &
+
+# if need to rerun the build clean first
+bazel clean --expunge
+
+### failed
+build-out-fail1 - when compiling with clang 16.
+build-out-fail2 -
+   without clang module
+      nohup bazel build --config=opt --jobs=8 \
+      --verbose_failures --verbose_explanations \
+      --explain=/tmp/explain //tensorflow/tools/pip_package:build_pip_package > ../build-out &
+build-out-fail3
+ Currently Loaded Modulefiles:
+ 1) bazel/6.1.0   2) cuda/12.2.0   3) python/3.10.2   4) tensorRT/8.6.1.6   5) java/11   6) gcc/11.2.0  
+ nohup bazel build \
+    --config=opt --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" --config=cuda  \
+    --jobs=8 --verbose_failures --verbose_explanations --explain=/tmp/explain \
+  cp .tf_configure.bazelrc .tf_configure.bazelrc-2
+
+apparently no need for cxxopt anymore.
+
+build-out-fail4
+  nohup bazel build  --config=opt --config=cuda  --jobs=8 --verbose_failures --verbose_explanations --explain=/tmp/explain \
+    //tensorflow/tools/pip_package:build_pip_package > ../build-out &
+
+build-out-fail5
+  with .tf*2
+  1) bazel/6.1.0   2) cuda/12.2.0   3) python/3.10.2   4) tensorRT/8.6.1.6   5) java/11   6) gcc/11.2.0   7) llvm/16.0.1   8) clang/16.0.1  
+  nohup bazel build --config=opt --jobs=8 --verbose_failures --verbose_explanations --explain=/tmp/explain //tensorflow/tools/pip_package:build_pip_package > ../build-out-add &
+
+=============== remove =======
+
+#######################################
+# build whl package
+#######################################
+# note, same modules need to be loaded
+
+./bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+

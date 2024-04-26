@@ -22,16 +22,19 @@
     - tensorflow_{{version}}_python{{pyversion}}-keras
     - tensorflow_{{version}}_python{{pyversion}}-markdown
     - tensorflow_{{version}}_python{{pyversion}}-werkzeug
-  req280: 
+  req280:
     - tensorflow_{{version}}_python{{pyversion}}-astunparse
     - tensorflow_{{version}}_python{{pyversion}}-flatbuffers
     - tensorflow_{{version}}_python{{pyversion}}-libclang
+  req2150:
+    - "{{req280}}"
+    - tensorflow_{{version}}_python{{pyversion}}-ml_dtypes
   requires:
     - python_{{pyversion}}
     - python_{{pyversion}}-numpy
     - python_{{pyversion}}-six
     - python_{{pyversion}}-wheel
-    - !ifeq "{{version}},2.0.0,{{req200}},{{req280}}"
+    - "{{req{{versions.tensorflow_vshort}}}}"
     - tensorflow_{{version}}_python{{pyversion}}-absl-py
     - tensorflow_{{version}}_python{{pyversion}}-gast
     - tensorflow_{{version}}_python{{pyversion}}-google-pasta

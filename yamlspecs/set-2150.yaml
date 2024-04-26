@@ -1,0 +1,16 @@
+!include packages.yaml
+---
+versions: versions-2150.yaml
+py_specific:
+  - astunparse
+  - flatbuffers
+  - libclang
+  - ml_dtypes
+non_py:
+  - tensorRT
+  - tensorRT-module
+  - bazel
+  - bazel-module
+build:
+  - tensorflow
+  - tensorflow-module
