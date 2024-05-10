@@ -3,8 +3,15 @@
 - package: ml_dtypes
   name: ml_dtypes
   version: "{{versions.ml_dtypes}}"
+  suffix: "{{versions.ml_dtypes_suffix}}"
+  extension: whl
+  no_src_dir: True
+  src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
   pypiurl: https://files.pythonhosted.org/packages/{{versions.ml_dtypes_hash}}
   vendor_source:  "{{pypiurl}}/{{src_tarball}}"
   description: |
     Ml_dtypes {{version}} is a stand-alone implementation of several 
     NumPy dtype extensions used in machine learning libraries
+  install:
+    makeinstall:  "{{install_pip}}"
+  rpmBuildIdLinks: none
