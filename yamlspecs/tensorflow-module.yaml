@@ -11,3 +11,4 @@
     prereq:
       - "{{build.modules}}"
       - cuda/{{cudaversion}}
+      - tensorRT/{{versions.tensorRT}}
