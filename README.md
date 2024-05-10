@@ -2,7 +2,7 @@
 Building tensorflow. 
 
 See generic step instructions to compile from source https://www.tensorflow.org/install/source. 
-Details of specific build instrucionts is in `yamlspecs/README-build-tensorflow*`
+Details of specific build instrucionts are in `yamlspecs/README-build-tensorflow-<version>`
 
 ### Download source
 
@@ -64,6 +64,11 @@ Build/install all the prerequisites.
 
    Compile python whl files and install packaged  contents. Requires cuDNN
    Install instructions https://docs.nvidia.com/deeplearning/sdk/tensorrt-install-guide/index.html#installing-tar
+
+   for CUDA 12.x use  TensorRT 8.6 GA
+   https://developer.nvidia.com/downloads/compute/machine-learning/tensorrt/secure/8.6.1/tars/TensorRT-8.6.1.6.Linux.x86_64-gnu.cuda-12.0.tar.gz
+   The following page claims that libcudnn is an optional dependency for tensorRT now
+   https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html#installing-tar
 
 1. **Optional ComputeCPP**
   
