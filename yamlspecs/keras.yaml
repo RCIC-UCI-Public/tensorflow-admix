@@ -19,6 +19,10 @@
     pkgmake: echo 'Build performed in install'
   install:
     makeinstall: !ifeq "{{type}},setup,{{install_setup}},{{install_pip}}"
+  req3:
+    - tensorflow_{{versions.tensorflow}}_python{{pyversion}}-dm-tree
+    - python_{{pyversion}}-rich
   requires:
     - python_{{pyversion}}
     - python_{{pyversion}}-pyyaml
+    - !ifeq "{{versions.keras_major}},3,{{req3}},"

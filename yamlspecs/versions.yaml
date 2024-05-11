@@ -23,6 +23,7 @@ keras: "2.3.1"
 keras_hash:
 keras_extension: ".tar.gz"
 keras_build: "setup"
+keras_major: "2"
 markdown: "3.2.2"
 opt_einsum: "3.1.0"
 protobuf: "3.12.0"
