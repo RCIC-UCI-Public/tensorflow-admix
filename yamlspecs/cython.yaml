@@ -1,0 +1,9 @@
+!include pymodule.yaml
+---
+- package: Cython support
+  name: cython
+  version: "{{versions.cython}}"
+  vendor_source: https://github.com/cython/cython/archive/{{version}}.{{extension}}
+  description: |
+    Cython {{version}} for python {{pyversion}}. 
+    The Cython compiler for writing C extensions

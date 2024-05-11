@@ -18,7 +18,6 @@ py_common:
   - grpcio
   - protobuf
   - tensorboard
-  - tensorflow_estimator
   - termcolor
   - wrapt
 non_py:
@@ -27,6 +26,7 @@ non_py:
 bootstrap:
   - "{{py_specific}}"
   - "{{py_common}}"
+  - tensorflow_estimator
   - "{{non_py}}"
 build:
   - tensorflow
@@ -36,3 +36,4 @@ manifest:
   - "{{build}}"
 sets:
   - "280"
+  - "2161"

@@ -7,6 +7,7 @@
   no_src_dir: True
   extension: whl
   suffix: "{{versions.tensorflow_suffix}}"
+  release: 3
   src_tarball: "{{name}}-{{version}}-{{suffix}}.{{extension}}"
   # source distro was used for building the whl package, See ../README for details
   # built whl package is on google drive, leave below empty to prevent overwriting
@@ -16,22 +17,29 @@
   install:
     makeinstall: "{{install_pip}}"
   req200: 
+    - python_{{pyversion}}-numpy
     - tensorflow_{{version}}_python{{pyversion}}-astor
     - tensorflow_{{version}}_python{{pyversion}}-backports.weakref
     - tensorflow_{{version}}_python{{pyversion}}-keras-applications
-    - tensorflow_{{version}}_python{{pyversion}}-keras
     - tensorflow_{{version}}_python{{pyversion}}-markdown
     - tensorflow_{{version}}_python{{pyversion}}-werkzeug
+    - tensorflow_{{version}}_python{{pyversion}}-tensorflow_estimator
   req280:
+    - python_{{pyversion}}-numpy
     - tensorflow_{{version}}_python{{pyversion}}-astunparse
     - tensorflow_{{version}}_python{{pyversion}}-flatbuffers
     - tensorflow_{{version}}_python{{pyversion}}-libclang
-  req2150:
-    - "{{req280}}"
+    - tensorflow_{{version}}_python{{pyversion}}-tensorflow_estimator
+  req2161:
+    - tensorflow_{{version}}_python{{pyversion}}-astunparse
+    - tensorflow_{{version}}_python{{pyversion}}-flatbuffers
+    - tensorflow_{{version}}_python{{pyversion}}-libclang
     - tensorflow_{{version}}_python{{pyversion}}-ml_dtypes
+    - tensorflow_{{version}}_python{{pyversion}}-cython
+    - tensorflow_{{version}}_python{{pyversion}}-numpy
+    - tensorflow_{{version}}_python{{pyversion}}-dm-tree
   requires:
     - python_{{pyversion}}
-    - python_{{pyversion}}-numpy
     - python_{{pyversion}}-six
     - python_{{pyversion}}-wheel
     - "{{req{{versions.tensorflow_vshort}}}}"
@@ -39,10 +47,10 @@
     - tensorflow_{{version}}_python{{pyversion}}-gast
     - tensorflow_{{version}}_python{{pyversion}}-google-pasta
     - tensorflow_{{version}}_python{{pyversion}}-keras-preprocessing
+    - tensorflow_{{version}}_python{{pyversion}}-keras
     - tensorflow_{{version}}_python{{pyversion}}-opt_einsum
     - tensorflow_{{version}}_python{{pyversion}}-grpcio
     - tensorflow_{{version}}_python{{pyversion}}-protobuf
     - tensorflow_{{version}}_python{{pyversion}}-tensorboard
-    - tensorflow_{{version}}_python{{pyversion}}-tensorflow_estimator
     - tensorflow_{{version}}_python{{pyversion}}-termcolor
     - tensorflow_{{version}}_python{{pyversion}}-wrapt

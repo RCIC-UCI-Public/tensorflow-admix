@@ -1,11 +1,18 @@
 !include packages.yaml
 ---
-versions: versions-2150.yaml
+versions: versions-2161.yaml
+bootstrap:
+  - cython
+  - numpy
+  - "{{py_specific}}"
+  - "{{py_common}}"
+  - "{{non_py}}"
 py_specific:
   - astunparse
   - flatbuffers
   - libclang
   - ml_dtypes
+  - dm-tree
 non_py:
   - tensorRT
   - tensorRT-module

@@ -13,3 +13,16 @@ Note 2: for classify-images.py, in non-interactive mode, displays all
 figures and block until the figures have been closed.  This is a default 
 matplotlib.pyplot.show() behavior. If overwrite is as show(block=False)
 the blocking stops but the images flash and close. 
+
+
+Command line checks
+===================
+python3 -c "import tensorflow as tf; print(tf.__version__)"
+python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+
+
+Check for numpy version (hex)
+============================
+from numpy.core import setup_common
+hex(setup_common.C_API_VERSION)
+

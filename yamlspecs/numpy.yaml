@@ -1,0 +1,24 @@
+!include pymodule.yaml
+---
+- package: numpy for python
+  name: numpy
+  version: "{{versions.numpy}}"
+  release: 6
+  addfile: site.cfg.template
+  vendor_source: https://github.com/numpy/numpy/releases/download/v{{version}}/{{name}}-{{version}}.{{extension}}
+  description: >
+    Numpy support for python {{pyversion}}
+  build: 
+    modules:
+      -  python/{{pyversion}}
+      -  OpenBLAS/{{versions.OpenBLAS}}
+    pkgmake: export PYTHONPATH={{pyroot}}:$$PYTHONPATH; python setup.py build
+  install:
+    makeinstall: >
+      sed -e "s%&PREFIX&%$$OpenBLAS__PREFIX%g" ../site.cfg.template > site.cfg;
+      export PYTHONPATH={{pyroot}}:$$PYTHONPATH; {{install_setup}}
+      #export PYTHONPATH={{pyroot}}:$$PYTHONPATH; python setup.py install --root $(ROOT) --prefix {{root}}
+  requires:
+    - python_{{pyversion}}
+    - libgfortran
+    - OpenBLAS/{{versions.OpenBLAS}}
