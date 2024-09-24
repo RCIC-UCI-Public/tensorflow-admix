@@ -23,6 +23,8 @@ py_common:
 non_py:
   - bazel
   - bazel-module
+  - tensorRT
+  - tensorRT-module
 bootstrap:
   - "{{py_specific}}"
   - "{{py_common}}"

@@ -6,6 +6,7 @@ tensorRT: "6.0.1.5"
 tensorRT_build: "CentOS-7.6.x86_64-gnu.cuda-10.1.cudnn7.6"
 tensorRT_py: "cp36"
 tensorflow: "2.0.0"
+tensorflow_module_release: "5"
 tensorflow_vshort: "200"
 tensorflow_suffix: "cp38-cp38-linux_x86_64"
 ### python prereqs
