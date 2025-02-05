@@ -8,6 +8,7 @@ py_specific:
   - markdown
   - werkzeug
   - tensorflow_estimator
-manifest:
-  - "{{bootstrap}}"
-  - "{{build}}"
+bootstrap:
+  - "{{bootstrap0}}"
+build:
+  - "{{build0}}"

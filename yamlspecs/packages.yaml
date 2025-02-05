@@ -15,17 +15,21 @@ py_common:
   - tensorboard
   - termcolor
   - wrapt
-bootstrap:
+bootstrap0:
   - "{{py_specific}}"
   - "{{py_common}}"
   - tensorRT
   - tensorRT-module
   - bazel
   - bazel-module
-build:
+build0:
   - tensorflow
   - tensorflow-module
+bootstrap:
+build:
 manifest:
+  - "{{bootstrap}}"
+  - "{{build}}"
 sets:
   - "200"
   - "280"

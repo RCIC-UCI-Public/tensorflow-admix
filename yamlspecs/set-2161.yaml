@@ -9,6 +9,7 @@ py_specific:
   - libclang
   - ml_dtypes
   - dm-tree
-manifest:
-  - "{{bootstrap}}"
-  - "{{build}}"
+bootstrap:
+  - "{{bootstrap0}}"
+build:
+  - "{{build0}}"

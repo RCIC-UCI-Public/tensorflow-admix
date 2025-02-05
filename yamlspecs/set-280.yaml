@@ -6,6 +6,7 @@ py_specific:
   - flatbuffers
   - libclang
   - tensorflow_estimator
-manifest:
-  - "{{bootstrap}}"
-  - "{{build}}"
+bootstrap:
+  - "{{bootstrap0}}"
+build:
+  - "{{build0}}"
