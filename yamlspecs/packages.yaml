@@ -3,11 +3,6 @@ system:
   - yum-utils
   - java-11-openjdk-devel
 py_specific:
-  - astor
-  - backports-weakref
-  - keras_applications
-  - markdown
-  - werkzeug
 py_common:
   - absl-py
   - gast
@@ -20,22 +15,18 @@ py_common:
   - tensorboard
   - termcolor
   - wrapt
-non_py:
-  - bazel
-  - bazel-module
-  - tensorRT
-  - tensorRT-module
 bootstrap:
   - "{{py_specific}}"
   - "{{py_common}}"
-  - tensorflow_estimator
-  - "{{non_py}}"
+  - tensorRT
+  - tensorRT-module
+  - bazel
+  - bazel-module
 build:
   - tensorflow
   - tensorflow-module
 manifest:
-  - "{{bootstrap}}"
-  - "{{build}}"
 sets:
+  - "200"
   - "280"
   - "2161"

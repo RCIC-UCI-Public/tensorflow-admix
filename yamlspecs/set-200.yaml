@@ -1,10 +1,12 @@
 !include packages.yaml
 ---
-versions: versions-280.yaml
+versions: versions-200.yaml
 py_specific:
-  - astunparse
-  - flatbuffers
-  - libclang
+  - astor
+  - backports-weakref
+  - keras_applications
+  - markdown
+  - werkzeug
   - tensorflow_estimator
 manifest:
   - "{{bootstrap}}"
