@@ -1,4 +1,5 @@
 ---
+site: !include site.yaml
 system:
   - yum-utils
   - java-11-openjdk-devel
@@ -31,6 +32,6 @@ manifest:
   - "{{bootstrap}}"
   - "{{build}}"
 sets:
-  - "200"
+  - !eval "'' if {{site.os_release}} >= 9 else '200'"
   - "280"
   - "2161"
