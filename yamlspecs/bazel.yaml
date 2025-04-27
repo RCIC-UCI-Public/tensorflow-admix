@@ -14,7 +14,10 @@
   no_src_dir: True
   bdir: compile-bazel
   build:
-    pkgmake: mkdir {{bdir}}; cd {{bdir}}; unzip $(REDHAT.ROOT)/sources/{{src_tarball}}; env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
+    ## Bazel 4.2.2 honks on gcc11. Build it with an older gcc.
+    gccdowngrade: module load gcc/{{versions.gccpermissive}};
+    gccbazel: !ifeq "{{version}},4.2.2,{{build.gccdowngrade}},"
+    pkgmake: mkdir {{bdir}}; cd {{bdir}}; unzip $(REDHAT.ROOT)/sources/{{src_tarball}}; {{build.gccbazel}} env EXTRA_BAZEL_ARGS="--host_javabase=@local_jdk//:jdk" bash ./compile.sh
     modules:  
       - !ifeq "{{versions.bazel_java}},java,java/{{versions.java}},"
     target:  
