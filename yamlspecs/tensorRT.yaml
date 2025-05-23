@@ -2,7 +2,7 @@
 ---
 - package: TensorRT
   distname: TensorRT
-  name: tensorRT 
+  name: tensorRT
   release: 4
   baserpm: "{{name}}_{{version}}_python{{pyversion}}"
   version: "{{versions.tensorRT}}"
@@ -12,15 +12,17 @@
   vendor_source: "{{nvidiaurl}}/{{src_tarball}}"
   parent: "{{pkg_defaults.app_path}}/{{name}}"
   description: |
-    TensorRT {{version}} provides API's via C++ and Python that help to express deep learning 
-    models via the Network Definition API or load a pre-defined model via the parsers 
-    that allows TensorRT to optimize and run them on an NVIDIA GPU.
+    TensorRT is a machine learning framework published by Nvidia.
+    Used to run high-performance deep learning inference. It provides
+    API's via C++ and Python that help to express deep learning models
+    via the Network Definition API or load a pre-defined model via the
+    parsers that allows TensorRT to optimize and run them on an NVIDIA GPU.
   src_dir: "{{distname}}-{{version}}"
   root: "{{parent}}/{{version}}"
-  contents: bin include lib samples 
+  contents: bin include lib samples
   docs: doc/pdf/*pdf  doc/*txt TensorRT-Release-Notes.pdf
   pysuffix: "{{versions.tensorRT_py}}-none-linux_x86_64"
-  addfile: 
+  addfile:
     - filter-requires-{{name}}.sh
   install:
     makeinstall: >

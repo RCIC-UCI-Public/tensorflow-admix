@@ -16,7 +16,7 @@
     TensorFlow is an open source software library for high performance numerical computation
   install:
     makeinstall: "{{install_pip}}"
-  req200: 
+  req200:
     - python_{{pyversion}}-numpy
     - tensorflow_{{version}}_python{{pyversion}}-astor
     - tensorflow_{{version}}_python{{pyversion}}-backports.weakref

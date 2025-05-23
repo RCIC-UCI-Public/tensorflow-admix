@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: opt_einsum 
+- package: opt_einsum
   name: opt_einsum
   version: "{{versions.opt_einsum}}"
   vendor_source: https://github.com/dgasmith/opt_einsum/archive/v{{version}}.{{extension}}

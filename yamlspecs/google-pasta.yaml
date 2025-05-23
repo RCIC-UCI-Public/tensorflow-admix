@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: google-pasta 
+- package: google-pasta
   name: google-pasta
   release: 2
   version: "{{versions.google_pasta}}"

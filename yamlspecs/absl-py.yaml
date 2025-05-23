@@ -8,5 +8,5 @@
   suffix: !ifeq "{{prefix}},pypi-,pypi-v,"
   src_dir: abseil-py-{{suffix}}{{version}}
   description: |
-    Abseil Python Common Libraries, a collection of Python library code for building Python applications. This
+    Abseil Python Common Libraries. A collection of Python library code for building Python applications. This
     code is collected from Google's own Python code base, and has been extensively tested and used in production

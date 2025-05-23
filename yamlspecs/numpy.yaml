@@ -8,7 +8,7 @@
   vendor_source: https://github.com/numpy/numpy/releases/download/v{{version}}/{{name}}-{{version}}.{{extension}}
   description: >
     Numpy support for python {{pyversion}}
-  build: 
+  build:
     modules:
       -  python/{{pyversion}}
       -  OpenBLAS/{{versions.OpenBLAS}}

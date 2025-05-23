@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: gast 
+- package: gast
   name: gast
   version: "{{versions.gast}}"
   vendor_source: https://github.com/serge-sans-paille/gast/archive/{{version}}.{{extension}}

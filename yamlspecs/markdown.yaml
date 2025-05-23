@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: Markdown 
+- package: Markdown
   name: markdown
   version: "{{versions.markdown}}"
   vendor_source: https://github.com/Python-Markdown/markdown/archive/{{version}}.{{extension}}

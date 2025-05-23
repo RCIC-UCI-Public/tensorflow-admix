@@ -1,7 +1,7 @@
 !include pymodule.yaml
 ---
-- package: dm-tree 
-  name: dm-tree 
+- package: dm-tree
+  name: dm-tree
   version: "{{versions.dm_tree}}"
   vendor_source: https://github.com/google-deepmind/tree/archive/refs/tags/{{version}}.{{extension}}
   src_dir: tree-{{version}}

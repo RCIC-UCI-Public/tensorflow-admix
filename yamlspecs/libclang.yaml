@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: libclang 
+- package: libclang
   name: libclang
   version: "{{versions.libclang}}"
   suffix: py2.py3-none-manylinux1_x86_64

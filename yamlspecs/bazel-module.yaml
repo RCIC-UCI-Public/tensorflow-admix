@@ -1,7 +1,7 @@
 !include bazel.yaml
 !include rcic-module.yaml
 ---
-- package: bazel module 
+- package: bazel module
   category: TOOLS
   release: 2
   module:

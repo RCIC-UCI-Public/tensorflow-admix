@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: grpcio 
+- package: grpcio
   name: grpcio
   version: "{{versions.grpcio}}"
   pypiurl: https://files.pythonhosted.org/packages/{{versions.grpcio_hash}}

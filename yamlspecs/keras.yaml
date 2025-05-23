@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: keras 
+- package: keras
   name: keras
   version: "{{versions.keras}}"
   extension: "{{versions.keras_extension}}"

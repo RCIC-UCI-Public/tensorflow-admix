@@ -1,13 +1,13 @@
 !include tensorRT.yaml
 !include rcic-module.yaml
 ---
-- package: tensorRT module 
+- package: tensorRT module
   category: AI-LEARNING
   module:
     prepend_path:
       - PATH {{root}}/bin
       - LD_LIBRARY_PATH {{root}}/{{module.lib}}
       - PYTHONPATH {{pyroot}}
-    prereq: 
+    prereq:
       - "{{build.modules}}"
       - "cuda/{{cudaversion}}"

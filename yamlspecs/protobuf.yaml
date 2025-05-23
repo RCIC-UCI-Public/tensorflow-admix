@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: protobuf 
+- package: protobuf
   name: protobuf
   version: "{{versions.protobuf}}"
   no_src_dir: True

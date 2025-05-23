@@ -1,6 +1,6 @@
 !include pymodule.yaml
 ---
-- package: tensorflow_estimator 
+- package: tensorflow_estimator
   name: tensorflow_estimator
   version: "{{versions.tensorflow_estimator}}"
   suffix: py2.py3-none-any

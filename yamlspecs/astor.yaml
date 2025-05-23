@@ -1,8 +1,8 @@
 !include pymodule.yaml
 ---
-- package: astor 
+- package: astor
   name: astor
   version: "{{versions.astor}}"
-  vendor_source: https://github.com/berkerpeksag/astor/archive/{{version}}.{{extension}} 
+  vendor_source: https://github.com/berkerpeksag/astor/archive/{{version}}.{{extension}}
   description: |
-    Read/rewrite/write Python abstract syntax trees (ASTs)
+    Read/rewrite/write Python abstract syntax trees (ASTs).
