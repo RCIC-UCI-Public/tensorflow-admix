@@ -1,4 +1,5 @@
 # build files
+00STAGE*/
 sources/*
 BUILD/
 RPMS/
